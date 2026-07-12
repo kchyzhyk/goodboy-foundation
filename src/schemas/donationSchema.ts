@@ -24,10 +24,7 @@ export const donationSchema = z.object({
         .refine((val) => val === true, 'Musíte súhlasiť so spracovaním osobných údajov'),
 }).refine(
     (data) => {
-        if (data.helpType === 'specific' && !data.shelterId) {
-            return false;
-        }
-        return true;
+       return !(data.helpType === 'specific' && !data.shelterId);
     },
     {
         message: 'Prosím vyberte útulok',
