@@ -8,6 +8,7 @@ import React from "react";
 import Providers from "@/src/app/providers";
 
 export const metadata: Metadata = {
+    metadataBase: new URL('https://goodboy-foundation.vercel.app'), // 👈 Добавь это
     title: {
         default: 'GoodBoy Foundation - Podporte slovenské útulky pre psov',
         template: '%s | GoodBoy Foundation'
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
     openGraph: {
         type: 'website',
         locale: 'sk_SK',
-        url: 'https://goodboy-foundation.sk',
+        url: 'https://goodboy-foundation.vercel.app',
         title: 'GoodBoy Foundation - Podporte slovenské útulky pre psov',
         description: 'Pomáhame slovenským útulkom pre psov. Prispejte na dobrú vec a podporte psíkov v núdzi.',
         siteName: 'GoodBoy Foundation',
