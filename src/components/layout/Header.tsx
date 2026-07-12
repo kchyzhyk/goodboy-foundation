@@ -28,7 +28,9 @@ export default function Header() {
     ];
 
     return (
-        <header className={`sticky top-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-white/80 backdrop-blur-sm shadow-sm'}`}>
+        <header className={`sticky top-0 z-50 transition-all duration-300 ${
+            isScrolled ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-white/80 backdrop-blur-sm shadow-sm'
+        }`}>
             <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
                     {/* Logo */}
@@ -48,7 +50,6 @@ export default function Header() {
                         <span className="sm:hidden">GoodBoy</span>
                     </Link>
 
-                    {/* Desktop Navigation */}
                     <div className="hidden md:flex items-center gap-1">
                         {navItems.map((item) => {
                             const isActive = pathname === item.href;
@@ -74,7 +75,6 @@ export default function Header() {
                         <LanguageSwitcher />
                     </div>
 
-                    {/* Mobile Menu Button */}
                     <button
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                         className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -98,7 +98,6 @@ export default function Header() {
                     </button>
                 </div>
 
-                {/* Mobile Navigation */}
                 <motion.div
                     initial={false}
                     animate={isMobileMenuOpen ? 'open' : 'closed'}
@@ -107,9 +106,9 @@ export default function Header() {
                         closed: { height: 0, opacity: 0 },
                     }}
                     transition={{ duration: 0.3 }}
-                    className="md:hidden overflow-hidden"
+                    className="md:hidden overflow-visible" // 👈 Изменено с overflow-hidden на overflow-visible
                 >
-                    <div className="py-2 space-y-1 border-t border-gray-100">
+                    <div className="py-2 space-y-1 border-t border-gray-100 relative">
                         {navItems.map((item) => {
                             const isActive = pathname === item.href;
                             return (
@@ -125,7 +124,7 @@ export default function Header() {
                                 </Link>
                             );
                         })}
-                        <div className="px-4 py-2">
+                        <div className="px-4 py-2 relative z-50">
                             <LanguageSwitcher />
                         </div>
                     </div>
