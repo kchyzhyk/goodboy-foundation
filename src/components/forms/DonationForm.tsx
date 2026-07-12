@@ -5,13 +5,15 @@ import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { motion, AnimatePresence } from 'framer-motion';
 import { IconTrash, IconEdit } from '@tabler/icons-react';
-import {DonationFormSchemaType, donationSchema} from '@/src/schemas/donationSchema';
-import type {Donor, SubmitDonationRequest} from '@/src/types/api';
+import { DonationFormSchemaType, donationSchema } from '@/src/schemas/donationSchema';
+import type { Donor, SubmitDonationRequest } from '@/src/types/api';
 import { useShelters, useSubmitDonation } from '@/src/hooks/useDonation';
 import { useDonationStore } from '@/src/store/donationStore';
 import DonorForm from './DonorForm';
+import { useTranslation } from '@/src/hooks/useTranslation';
 
 export default function DonationForm() {
+    const { t } = useTranslation();
     const [activeStep, setActiveStep] = useState(0);
     const [editingDonorIndex, setEditingDonorIndex] = useState<number | null>(null);
     const { data: shelters, isLoading: sheltersLoading } = useShelters();
@@ -40,10 +42,15 @@ export default function DonationForm() {
     const helpType = watch('helpType');
     const amount = watch('amount');
     const donors = watch('donors');
+    const steps = [
+        t('donation.steps.step1'),
+        t('donation.steps.step2'),
+        t('donation.steps.step3'),
+    ];
 
     const onSubmit = (data: DonationFormSchemaType) => {
         if (data.donors.length === 0) {
-            alert('Prosím pridajte aspoň jedného darcu');
+            alert(t('donation.atLeastOneDonor'));
             return;
         }
 
@@ -71,7 +78,7 @@ export default function DonationForm() {
             },
             onError: (error: any) => {
                 console.error('❌ Error:', error);
-                let errorMessage = 'Chyba pri odosielaní. Skúste to prosím neskôr.';
+                let errorMessage = t('errors.submit') || 'Chyba pri odosielaní. Skúste to prosím neskôr.';
                 if (error.response?.data?.messages?.[0]?.message) {
                     errorMessage = error.response.data.messages[0].message;
                 } else if (error.message) {
@@ -124,7 +131,7 @@ export default function DonationForm() {
     return (
         <div className="max-w-2xl mx-auto bg-white p-6 md:p-8 rounded-lg shadow-lg mt-8">
             <div className="flex justify-between mb-8">
-                {['Krok 1', 'Krok 2', 'Krok 3'].map((label, index) => (
+                {steps.map((label, index) => (
                     <div key={index} className="flex-1 text-center">
                         <div
                             className={`text-sm font-semibold ${
@@ -143,6 +150,7 @@ export default function DonationForm() {
             </div>
 
             <AnimatePresence mode="wait">
+                {/* Step 1 */}
                 {activeStep === 0 && (
                     <motion.div
                         key="step1"
@@ -152,7 +160,7 @@ export default function DonationForm() {
                         variants={stepVariants}
                         transition={{ duration: 0.3 }}
                     >
-                        <h2 className="text-2xl font-bold mb-4">📋 Typ pomoci</h2>
+                        <h2 className="text-2xl font-bold mb-4">{t('donation.helpType')}</h2>
 
                         <div className="space-y-4">
                             <Controller
@@ -161,7 +169,7 @@ export default function DonationForm() {
                                 render={({ field }) => (
                                     <div>
                                         <label className="block text-sm font-medium mb-2">
-                                            Vyberte formu pomoci
+                                            {t('donation.helpType')}
                                         </label>
                                         <div className="space-y-2">
                                             <label className="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
@@ -175,7 +183,7 @@ export default function DonationForm() {
                                                     }}
                                                     className="mr-3"
                                                 />
-                                                💝 Všeobecný dar pre nadáciu
+                                                {t('donation.general')}
                                             </label>
                                             <label className="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
                                                 <input
@@ -188,7 +196,7 @@ export default function DonationForm() {
                                                     }}
                                                     className="mr-3"
                                                 />
-                                                🏠 Dar pre konkrétny útulok
+                                                {t('donation.specific')}
                                             </label>
                                         </div>
                                         {errors.helpType && (
@@ -213,7 +221,7 @@ export default function DonationForm() {
                                         render={({ field }) => (
                                             <div>
                                                 <label className="block text-sm font-medium mb-2">
-                                                    Vyberte útulok *
+                                                    {t('donation.chooseShelter')}
                                                 </label>
                                                 <select
                                                     className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -227,7 +235,7 @@ export default function DonationForm() {
                                                     }}
                                                     disabled={sheltersLoading}
                                                 >
-                                                    <option value="">Vyberte útulok...</option>
+                                                    <option value=""></option>
                                                     {shelters?.map((shelter) => (
                                                         <option key={shelter.id} value={shelter.id}>
                                                             {shelter.name}
@@ -251,7 +259,7 @@ export default function DonationForm() {
                                 render={({ field }) => (
                                     <div>
                                         <label className="block text-sm font-medium mb-2">
-                                            💶 Vyberte sumu *
+                                            {t('donation.chooseAmount')}
                                         </label>
                                         <div className="grid grid-cols-4 gap-2 mb-3">
                                             {presetAmounts.map((preset) => (
@@ -275,7 +283,7 @@ export default function DonationForm() {
                                         <input
                                             type="number"
                                             className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                            placeholder="Vlastná suma"
+                                            placeholder={t('donation.customAmount')}
                                             value={field.value || ''}
                                             onChange={(e) => {
                                                 const value = e.target.value
@@ -306,13 +314,14 @@ export default function DonationForm() {
                                         }
                                     }}
                                 >
-                                    Ďalej →
+                                    {t('donation.next')}
                                 </button>
                             </div>
                         </div>
                     </motion.div>
                 )}
 
+                {/* Step 2 */}
                 {activeStep === 1 && (
                     <motion.div
                         key="step2"
@@ -322,7 +331,7 @@ export default function DonationForm() {
                         variants={stepVariants}
                         transition={{ duration: 0.3 }}
                     >
-                        <h2 className="text-2xl font-bold mb-4">👤 Darcovia</h2>
+                        <h2 className="text-2xl font-bold mb-4">{t('donation.donors')}</h2>
 
                         {donors.length > 0 && (
                             <div className="mb-4 space-y-2">
@@ -345,14 +354,14 @@ export default function DonationForm() {
                                             <button
                                                 onClick={() => startEditing(index)}
                                                 className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition"
-                                                aria-label="Upraviť darcu"
+                                                aria-label={t('donation.editDonor')}
                                             >
                                                 <IconEdit size={18} />
                                             </button>
                                             <button
                                                 onClick={() => handleDeleteDonor(index)}
                                                 className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition"
-                                                aria-label="Odstrániť darcu"
+                                                aria-label={t('donation.deleteDonor')}
                                             >
                                                 <IconTrash size={18} />
                                             </button>
@@ -393,7 +402,7 @@ export default function DonationForm() {
                                             }}
                                         />
                                         <label className="text-sm">
-                                            Súhlasím so spracovaním osobných údajov *
+                                            {t('donation.consent')}
                                         </label>
                                     </div>
                                 )}
@@ -403,30 +412,31 @@ export default function DonationForm() {
                             )}
                         </div>
 
-                        <div className="flex justify-between mt-6">
+                        <div className="flex justify-between mt-6 gap-4">
                             <button
                                 className="px-6 py-2 bg-gray-300 rounded-lg hover:bg-gray-400 transition"
                                 onClick={() => setActiveStep(0)}
                             >
-                                ← Späť
+                                {t('donation.back')}
                             </button>
                             <button
                                 className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition disabled:opacity-50"
                                 onClick={handleSubmit(onSubmit)}
                                 disabled={isPending || donors.length === 0}
                             >
-                                {isPending ? 'Odosielam...' : '✅ Poslať dar'}
+                                {isPending ? t('donation.submitting') : t('donation.submit')}
                             </button>
                         </div>
 
                         {donors.length === 0 && !isPending && (
                             <p className="text-sm text-amber-600 mt-2">
-                                ⚠️ Pridajte aspoň jedného darcu
+                                ⚠️ {t('donation.atLeastOneDonor')}
                             </p>
                         )}
                     </motion.div>
                 )}
 
+                {/* Step 3 - Success */}
                 {activeStep === 2 && (
                     <motion.div
                         key="step3"
@@ -441,14 +451,14 @@ export default function DonationForm() {
                             transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
                         >
                             <h2 className="text-3xl font-bold text-green-600 mb-4">
-                                ✅ Ďakujeme!
+                                {t('donation.success')}
                             </h2>
                         </motion.div>
                         <p className="text-lg mb-4">
-                            Váš dar bol úspešne zaznamenaný.
+                            {t('donation.successMessage')}
                         </p>
                         <p className="text-gray-500 mb-6">
-                            Spoločne pomáhame psíkom v núdzi 🐕
+                            {t('donation.helpingTogether')}
                         </p>
                         <button
                             className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all hover:scale-105"
@@ -457,7 +467,7 @@ export default function DonationForm() {
                                 setActiveStep(0);
                             }}
                         >
-                            Nový dar
+                            {t('donation.newDonation')}
                         </button>
                     </motion.div>
                 )}

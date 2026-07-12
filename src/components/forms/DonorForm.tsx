@@ -6,6 +6,7 @@ import { IconEdit, IconUserPlus } from '@tabler/icons-react';
 import { useEffect } from 'react';
 import { DonorFormSchema, donorSchema } from "@/src/schemas/donationSchema";
 import { Donor } from "@/src/types/api";
+import { useTranslation } from '@/src/hooks/useTranslation';
 
 interface DonorFormProps {
     onAddDonor?: (donor: Donor) => void;
@@ -22,6 +23,8 @@ export default function DonorForm({
                                       initialData,
                                       onCancel,
                                   }: DonorFormProps) {
+    const { t } = useTranslation();
+
     const {
         control,
         handleSubmit,
@@ -98,7 +101,7 @@ export default function DonorForm({
                     render={({ field }) => (
                         <div>
                             <label htmlFor="name" className="block text-sm font-medium mb-1">
-                                Meno *
+                                {t('donor.name')}
                             </label>
                             <input
                                 {...field}
@@ -106,7 +109,6 @@ export default function DonorForm({
                                 className={`w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
                                     errors.name ? 'border-red-500' : 'border-gray-300'
                                 }`}
-                                placeholder="Zadajte meno"
                                 value={field.value || ''}
                             />
                             {errors.name && (
@@ -122,7 +124,7 @@ export default function DonorForm({
                     render={({ field }) => (
                         <div>
                             <label htmlFor="surname" className="block text-sm font-medium mb-1">
-                                Priezvisko *
+                                {t('donor.surname')}
                             </label>
                             <input
                                 {...field}
@@ -130,7 +132,6 @@ export default function DonorForm({
                                 className={`w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
                                     errors.surname ? 'border-red-500' : 'border-gray-300'
                                 }`}
-                                placeholder="Zadajte priezvisko"
                                 value={field.value || ''}
                             />
                             {errors.surname && (
@@ -146,7 +147,7 @@ export default function DonorForm({
                     render={({ field }) => (
                         <div>
                             <label htmlFor="email" className="block text-sm font-medium mb-1">
-                                Email *
+                                {t('donor.email')}
                             </label>
                             <input
                                 {...field}
@@ -155,7 +156,7 @@ export default function DonorForm({
                                 className={`w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
                                     errors.email ? 'border-red-500' : 'border-gray-300'
                                 }`}
-                                placeholder="vas@email.sk"
+                                placeholder="123@email.sk"
                                 value={field.value || ''}
                             />
                             {errors.email && (
@@ -171,7 +172,7 @@ export default function DonorForm({
                     render={({ field }) => (
                         <div>
                             <label htmlFor="phone" className="block text-sm font-medium mb-1">
-                                Telefón *
+                                {t('donor.phone')}
                             </label>
                             <input
                                 {...field}
@@ -183,7 +184,7 @@ export default function DonorForm({
                                 value={field.value || ''}
                             />
                             <p className="text-xs text-gray-500 mt-1">
-                                Formát: +420 123456789 alebo +421 123456789
+                                {t('donor.phoneFormat')}
                             </p>
                             {errors.phone && (
                                 <p className="text-red-500 text-sm mt-1">{errors.phone.message}</p>
@@ -200,7 +201,7 @@ export default function DonorForm({
                         onClick={handleCancel}
                         className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition"
                     >
-                        Zrušiť
+                        {t('donation.cancel')}
                     </button>
                 )}
                 <button
@@ -211,13 +212,13 @@ export default function DonorForm({
                         <>
                             <IconEdit size={18} />
                             {' '}
-                            Upraviť
+                            {t('donation.editDonor')}
                         </>
                     ) : (
                         <>
                             <IconUserPlus size={18} />
                             {' '}
-                            Pridať darcu
+                            {t('donation.addDonor')}
                         </>
                     )}
                 </button>

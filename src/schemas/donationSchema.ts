@@ -26,7 +26,7 @@ export const donationSchema = z.object({
         .max(10000, 'Maximálna suma je 10 000 €'),
     donors: z.array(donorSchema),
     consent: z.boolean()
-        .refine((val) => val === true, 'Musíte súhlasiť so spracovaním osobných údajov'),
+        .refine((val) => val, 'Musíte súhlasiť so spracovaním osobných údajov'),
 }).refine(
     (data) => data.helpType !== 'specific' || !!data.shelterId,
     {

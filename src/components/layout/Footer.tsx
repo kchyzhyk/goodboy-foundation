@@ -2,23 +2,26 @@
 
 import Link from 'next/link';
 import { IconHeart, IconBrandGithub, IconBrandTwitter, IconBrandInstagram } from '@tabler/icons-react';
+import { useTranslation } from '@/src/hooks/useTranslation';
 
 export default function Footer() {
+    const { t } = useTranslation();
     const currentYear = new Date().getFullYear();
 
     return (
         <footer className="bg-white/90 backdrop-blur-sm border-t border-gray-200 mt-auto">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    {/* Logo */}
                     <div className="md:col-span-1">
                         <div className="flex items-center gap-2 text-lg font-bold text-gray-900">
                             <span>🐕</span>
                             <span>
-                GoodBoy<span className="text-blue-600">Foundation</span>
-              </span>
+                                GoodBoy<span className="text-blue-600">Foundation</span>
+                            </span>
                         </div>
                         <p className="mt-2 text-sm text-gray-600">
-                            Pomáhame slovenským útulkom pre psov nájsť nové domovy.
+                            {t('footer.description')}
                         </p>
                         <div className="flex gap-3 mt-4">
                             <a
@@ -45,54 +48,57 @@ export default function Footer() {
                         </div>
                     </div>
 
+                    {/* Links */}
                     <div>
-                        <h3 className="font-semibold text-gray-900 mb-3">Odkazy</h3>
+                        <h3 className="font-semibold text-gray-900 mb-3">{t('footer.links')}</h3>
                         <ul className="space-y-2 text-sm">
                             <li>
                                 <Link href="/" className="text-gray-600 hover:text-blue-600 transition-colors">
-                                    Domov
+                                    {t('navigation.home')}
                                 </Link>
                             </li>
                             <li>
                                 <Link href="/donors" className="text-gray-600 hover:text-blue-600 transition-colors">
-                                    Prispievatelia
+                                    {t('navigation.donors')}
                                 </Link>
                             </li>
                             <li>
                                 <Link href="/kontakt" className="text-gray-600 hover:text-blue-600 transition-colors">
-                                    Kontakt
+                                    {t('navigation.contact')}
                                 </Link>
                             </li>
                         </ul>
                     </div>
 
+                    {/* Info */}
                     <div>
-                        <h3 className="font-semibold text-gray-900 mb-3">Informácie</h3>
+                        <h3 className="font-semibold text-gray-900 mb-3">{t('footer.info')}</h3>
                         <ul className="space-y-2 text-sm">
-                            <li className="text-gray-600">Hatiko 123</li>
+                            <li className="text-gray-600">Hlavná 123</li>
                             <li className="text-gray-600">811 01 Bratislava</li>
                             <li className="text-gray-600">info@goodboy-foundation.sk</li>
                         </ul>
                     </div>
 
+                    {/* Follow Us */}
                     <div>
-                        <h3 className="font-semibold text-gray-900 mb-3">Sledujte nás</h3>
+                        <h3 className="font-semibold text-gray-900 mb-3">{t('footer.followUs')}</h3>
                         <p className="text-sm text-gray-600">
-                            Buďte v obraze o našich aktivitách a pomáhajte spolu s nami.
+                            {t('footer.followUsDesc')}
                         </p>
                         <div className="mt-3 flex items-center gap-1 text-sm text-gray-600">
                             <IconHeart size={16} className="text-red-500 fill-red-500" />
-                            <span>Pomáhame od roku 2020</span>
+                            <span>{t('footer.helpingSince')}</span>
                         </div>
                     </div>
                 </div>
 
                 <div className="mt-8 pt-8 border-t border-gray-200 text-center text-sm text-gray-500">
                     <p>
-                        © {currentYear} GoodBoy Foundation. Všetky práva vyhradené.
+                        © {currentYear} GoodBoy Foundation. {t('footer.rights')}
                         <span className="hidden sm:inline"> | </span>
                         <br className="sm:hidden" />
-                        Vyrobené s ❤️ pre psíkov v núdzi
+                        {t('footer.madeWith')}
                     </p>
                 </div>
             </div>

@@ -1,0 +1,115 @@
+{
+  "title": "🐶 WOOF! GoodBoy Foundation - SUPPORT DOG SHELTERS!",
+  "subtitle": "🐕 WOOF WOOF! Support dog shelters!",
+  "stats": {
+    "total": "🐾 Total treats collected",
+    "contributors": "🐕 Good dog friends",
+    "shelters": "🏠 Dog houses"
+  },
+  "donation": {
+    "steps": {
+      "step1": "🐾 WOOF! Step 1",
+      "step2": "🐾 WOOF! Step 2",
+      "step3": "🐾 WOOF! Step 3"
+    },
+    "helpType": "📋 WOOF! Type of help?",
+    "general": "💝 WOOF! General donation for all good boys!",
+    "specific": "🏠 WOOF! Donation for specific doggo!",
+    "chooseShelter": "🐶 Choose dog house *",
+    "chooseAmount": "🦴 Choose amount of treats *",
+    "customAmount": "🦴 More treats!",
+    "next": "➡️ WOOF! Next!",
+    "donors": "👤 WOOF! Good dogs!",
+    "addDonor": "🐕 Add good dog!",
+    "editDonor": "✏️ Edit doggo",
+    "deleteDonor": "🗑️ Remove doggo",
+    "cancel": "❌ WOOF? Cancel?",
+    "atLeastOneDonor": "⚠️ WOOF! Add at least one good dog!",
+    "consent": "🐾 WOOF! I agree to the processing of personal data (treats) *",
+    "back": "🔙 WOOF! Back!",
+    "submit": "✅ WOOF! Send treats!",
+    "submitting": "🦴 Sending treats...",
+    "newDonation": "🐕 New donation!",
+    "success": "✅ WOOF! THANK YOU!",
+    "successMessage": "🐶 Your donation has been successfully recorded! WOOF!",
+    "helpingTogether": "🐾 Together we help good dogs in need! WOOF! 🐕"
+  },
+  "donor": {
+    "name": "🐕 Dog name",
+    "surname": "🐾 Owner's surname *",
+    "email": "📧 Woofmail *",
+    "phone": "📞 Dog phone *",
+    "phoneFormat": "Format: +420 123456789 or +421 123456789 (WOOF!)"
+  },
+  "errors": {
+    "name": {
+      "min": "WOOF! Name must be at least 2 characters!",
+      "max": "WOOF! Name can be maximum 20 characters!"
+    },
+    "surname": {
+      "min": "WOOF! Surname must be at least 2 characters!",
+      "max": "WOOF! Surname can be maximum 30 characters!"
+    },
+    "email": {
+      "invalid": "WOOF! Please enter a valid woofmail address!",
+      "required": "WOOF! Woofmail is required!"
+    },
+    "phone": {
+      "invalid": "WOOF! Please enter a valid dog phone number (+420/+421 123456789)"
+    },
+    "amount": {
+      "min": "WOOF! Minimum treats is 1 €",
+      "max": "WOOF! Maximum treats is 10 000 €"
+    },
+    "consent": "WOOF! You must agree to the processing of personal data (treats)!",
+    "shelter": "WOOF! Please select a dog house!",
+    "donors": "WOOF! Please add at least one good dog!"
+  },
+  "contact": {
+    "title": "📞 WOOF! Contact",
+    "subtitle": "🐾 Get in touch with good boys!",
+    "info": "🐕 Contact information",
+    "address": "🏠 Dog address",
+    "phone": "📞 Dog phone",
+    "email": "📧 Woofmail",
+    "web": "🌐 Woofsite",
+    "hours": "🕐 WOOF! Opening hours",
+    "weekdays": "Monday - Friday (WOOF!)",
+    "saturday": "Saturday (WOOF!)",
+    "sunday": "Sunday (WOOF! NO!)",
+    "closed": "🐾 Closed (sleeping)",
+    "emergency": "🚨 In case of emergency, bark at +421 900 123 456 (WOOF!)",
+    "where": "📍 Where to find us (WOOF!)",
+    "whatWeDo": "🐾 Who we help (WOOF!)",
+    "shelters": "🏠 Dog houses",
+    "sheltersDesc": "🐶 We support dog shelters and help good boys find new homes! WOOF!",
+    "dogs": "🐕 Good dogs",
+    "dogsDesc": "🦴 Every donation helps good dogs in need get treats and care! WOOF!",
+    "cooperation": "🤝 WOOF! Cooperation",
+    "cooperationDesc": "🐾 Together we can change the lives of good dogs in need! WOOF!"
+  },
+  "donors": {
+    "title": "👥 WOOF! Contributors",
+    "subtitle": "🐕 Good dogs who help other good dogs!",
+    "totalContributors": "🐾 Number of good dogs",
+    "totalAmount": "🦴 Total treats",
+    "thanks": "🐶 WOOF! THANK YOU to all good dogs! 🐕",
+    "thanksDesc": "🐾 Together we help dog shelters and good dogs in need! WOOF!",
+    "alreadyContributed": "🐕 good dogs have already contributed (WOOF!)"
+  },
+  "navigation": {
+    "home": "🏠 WOOF! Home",
+    "donors": "👥 WOOF! Good dogs",
+    "contact": "📞 WOOF! Contact"
+  },
+  "footer": {
+    "description": "🐶 We help good dogs find new homes! WOOF!",
+    "links": "🐾 Links",
+    "info": "📋 Information (WOOF!)",
+    "followUs": "🐕 Follow us!",
+    "followUsDesc": "🦴 Stay updated on our activities and help good dogs together with us! WOOF!",
+    "helpingSince": "🐾 Helping good dogs since 2020 (WOOF!)",
+    "rights": "🐶 All rights reserved (WOOF!)",
+    "madeWith": "🦴 Made with ❤️ for good dogs in need! WOOF!"
+  }
+}

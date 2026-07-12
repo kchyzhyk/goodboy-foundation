@@ -4,9 +4,12 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import LanguageSwitcher from '@/src/components/common/LanguageSwitcher';
+import { useTranslation } from '@/src/hooks/useTranslation';
 
 export default function Header() {
     const pathname = usePathname();
+    const { t } = useTranslation();
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -19,25 +22,17 @@ export default function Header() {
     }, []);
 
     const navItems = [
-        { href: '/', label: '🏠 Domov' },
-        { href: '/donors', label: '👥 Prispievatelia' },
-        { href: '/kontakt', label: '📞 Kontakt' },
+        { href: '/', label: t('navigation.home') },
+        { href: '/donors', label: t('navigation.donors') },
+        { href: '/kontakt', label: t('navigation.contact') },
     ];
 
     return (
-        <header
-            className={`sticky top-0 z-50 transition-all duration-300 ${
-                isScrolled
-                    ? 'bg-white/95 backdrop-blur-md shadow-lg'
-                    : 'bg-white/80 backdrop-blur-sm shadow-sm'
-            }`}
-        >
+        <header className={`sticky top-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-white/80 backdrop-blur-sm shadow-sm'}`}>
             <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
-                    <Link
-                        href="/"
-                        className="flex items-center gap-2 text-xl font-bold text-gray-900 hover:text-blue-600 transition-colors"
-                    >
+                    {/* Logo */}
+                    <Link href="/" className="flex items-center gap-2 text-xl font-bold text-gray-900 hover:text-blue-600 transition-colors">
                         <motion.span
                             initial={{ rotate: -10 }}
                             animate={{ rotate: 0 }}
@@ -47,11 +42,13 @@ export default function Header() {
                             🐕
                         </motion.span>
                         <span className="hidden sm:inline">
-              GoodBoy
-              <span className="text-blue-600">Foundation</span>
-            </span>
+                            GoodBoy
+                            <span className="text-blue-600">Foundation</span>
+                        </span>
                         <span className="sm:hidden">GoodBoy</span>
                     </Link>
+
+                    {/* Desktop Navigation */}
                     <div className="hidden md:flex items-center gap-1">
                         {navItems.map((item) => {
                             const isActive = pathname === item.href;
@@ -60,9 +57,7 @@ export default function Header() {
                                     key={item.href}
                                     href={item.href}
                                     className={`relative px-4 py-2 rounded-lg transition-all duration-300 ${
-                                        isActive
-                                            ? 'text-blue-600 bg-blue-50'
-                                            : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50/50'
+                                        isActive ? 'text-blue-600 bg-blue-50' : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50/50'
                                     }`}
                                 >
                                     <span>{item.label}</span>
@@ -76,7 +71,10 @@ export default function Header() {
                                 </Link>
                             );
                         })}
+                        <LanguageSwitcher />
                     </div>
+
+                    {/* Mobile Menu Button */}
                     <button
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                         className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -99,6 +97,8 @@ export default function Header() {
                         </div>
                     </button>
                 </div>
+
+                {/* Mobile Navigation */}
                 <motion.div
                     initial={false}
                     animate={isMobileMenuOpen ? 'open' : 'closed'}
@@ -118,15 +118,16 @@ export default function Header() {
                                     href={item.href}
                                     onClick={() => setIsMobileMenuOpen(false)}
                                     className={`block px-4 py-2 rounded-lg transition-all ${
-                                        isActive
-                                            ? 'text-blue-600 bg-blue-50'
-                                            : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50/50'
+                                        isActive ? 'text-blue-600 bg-blue-50' : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50/50'
                                     }`}
                                 >
                                     {item.label}
                                 </Link>
                             );
                         })}
+                        <div className="px-4 py-2">
+                            <LanguageSwitcher />
+                        </div>
                     </div>
                 </motion.div>
             </nav>

@@ -1,0 +1,116 @@
+{
+  "title": "🙄 GoodBoy Foundation - Supporting Dog Shelters (How Beneath Me)",
+  "subtitle": "We support Slovak shelters for dogs. Dogs. The creatures that chase their own tails. Brilliant. 🙄 (I could be conquering the world, but no, here we are.)",
+  "stats": {
+    "total": "💰 Total amount (not that I'm counting, but I am)",
+    "contributors": "👥 Number of contributors (mortals with too much time on their hands)",
+    "shelters": "🏠 Shelters (for the furry idiots who can't stop barking at mailmen)"
+  },
+  "donation": {
+    "steps": {
+      "step1": "😾 Step 1 (are we really doing this?)",
+      "step2": "😾 Step 2 (this is getting tedious)",
+      "step3": "😾 Step 3 (finally! I need a nap)"
+    },
+    "helpType": "📋 Type of help (not that it matters in the grand scheme of things 🤷)",
+    "general": "💝 General donation for the foundation (how magnanimous of you)",
+    "specific": "🏠 Donation for a specific shelter (oh look, you have a favourite. How precious 😏)",
+    "chooseShelter": "🎯 Select shelter * (if you must. I'd choose the one with the best sunbathing spots)",
+    "chooseAmount": "💰 Select amount * (don't be cheap. I've seen your Netflix subscription)",
+    "customAmount": "💎 Custom amount (go on, impress me. I'm easily bored)",
+    "next": "➡️ Next → (if you insist on dragging this out 🙄)",
+    "donors": "👤 Donors (mortals trying to buy their way into heaven)",
+    "addDonor": "➕ Add donor (the more the merrier, I suppose. More minions)",
+    "editDonor": "Edit (trying to improve? How adorably optimistic 🤔)",
+    "deleteDonor": "🗑️ Delete (poof! Like my patience)",
+    "cancel": "❌ Cancel (coward. Typical human behaviour 🐔)",
+    "atLeastOneDonor": "⚠️ Add at least one donor (you can't donate to thin air. Even I know that)",
+    "consent": "📝 I agree to the processing of personal data * (as if you have a choice. I've already read your browser history 🤷‍♀️)",
+    "back": "🔙 Back (retreating already? How predictable)",
+    "submit": "✅ Submit donation (finally! I was beginning to age)",
+    "submitting": "⏳ Submitting... (don't hold your breath. I've seen turtles move faster)",
+    "newDonation": "🔄 New donation (again? Don't you have anything better to do?)",
+    "success": "🎉 Thank you! (I'm not impressed, but you tried)",
+    "successMessage": "📋 Your donation has been successfully recorded. (I've filed it somewhere. Probably)",
+    "helpingTogether": "🤝 Together we help dogs in need 🐕 (and I plot world domination. We all have our hobbies 🐱)"
+  },
+  "donor": {
+    "name": "👤 Name (your mortal name. How quaint)",
+    "surname": "📛 Surname * (so I can properly judge your family line)",
+    "email": "📧 Email * (I promise not to spam you... much. Maybe just a little)",
+    "phone": "📱 Phone * (I won't call. I have better things to do)",
+    "phoneFormat": "📞 Format: +420 123456789 or +421 123456789 (not that I care)"
+  },
+  "errors": {
+    "name": {
+      "min": "😒 Name must be at least 2 characters (even I had a longer name before my curse)",
+      "max": "😅 Name can be maximum 20 characters (trying to show off, are we?)"
+    },
+    "surname": {
+      "min": "🙄 Surname must be at least 2 characters (if you even have one)",
+      "max": "😏 Surname can be maximum 30 characters (still shorter than my list of enemies)"
+    },
+    "email": {
+      "invalid": "📧 Please enter a valid email address (I know you have one. I've seen your spam folder)",
+      "required": "📧 Email is required (don't test me. I'm not in a good mood)"
+    },
+    "phone": {
+      "invalid": "📱 Please enter a valid phone number (+420/+421 123456789) (I'm watching. I'm always watching 👀)"
+    },
+    "amount": {
+      "min": "💰 Minimum amount is 1 € (even I could afford that with my catnip allowance)",
+      "max": "💎 Maximum amount is 10 000 € (trying to buy your way into heaven? 😏)"
+    },
+    "consent": "📝 You must agree to the processing of personal data (you've already agreed to much worse. Trust me)",
+    "shelter": "🏠 Please select a shelter (decisions, decisions. How exhausting)",
+    "donors": "👥 Please add at least one donor (one is fine. More is just more paperwork for me)",
+    "submit": "❌ Oops! Something went wrong. Try again. Or don't. I've got centuries to wait. 😼"
+  },
+  "contact": {
+    "title": "📞 Contact (if you must. I'd rather you didn't)",
+    "subtitle": "Get in touch with us (I'm not a cat. I'm a witch's familiar. There's a difference)",
+    "info": "📋 Contact information (yes, I exist. Try to contain your excitement)",
+    "address": "📍 Address (I have a lair. I mean, house. Whatever)",
+    "phone": "📱 Phone (I have a phone, but I prefer telepathy)",
+    "email": "📧 Email (I read them. I judge you. I delete them)",
+    "web": "🌐 Website (how very 21st century of us)",
+    "hours": "🕐 Opening hours (I'm nocturnal. Deal with it)",
+    "weekdays": "📅 Monday - Friday (the days I plot world domination)",
+    "saturday": "🎉 Saturday (the day I take a break from plotting)",
+    "sunday": "😴 Sunday (day of rest. Even I need my beauty sleep)",
+    "closed": "🚫 Closed (go away. I'm busy being magnificent)",
+    "emergency": "🚨 In case of emergency, contact me at +421 900 123 456. But only if it's actually an emergency. I'm not your personal assistant. I'm a terrifying creature of darkness. Well, technically I'm a cat.",
+    "where": "📍 Where to find us (if you dare)",
+    "whatWeDo": "🤔 Who we help (dogs. I know, but the spell book said so)",
+    "shelters": "🏠 Shelters (dog shelters. Don't ask me why)",
+    "sheltersDesc": "We support Slovak dog shelters. Because apparently, that's what I was cursed to do.",
+    "dogs": "🐕 Dogs (the creatures I am contractually obligated to help)",
+    "dogsDesc": "Every donation helps dogs in need. I don't make the rules. I just follow them. Mostly.",
+    "cooperation": "🤝 Cooperation (I play nice. For now)",
+    "cooperationDesc": "Together we can change the lives of dogs in need. Or I could just turn them into cats. But that's for later)"
+  },
+  "donors": {
+    "title": "👥 Contributors (a.k.a. people who passed the test)",
+    "subtitle": "People who help dogs. Good for them. I guess.",
+    "totalContributors": "👥 Number of contributors (impressive. For mortals)",
+    "totalAmount": "💰 Total amount (nice. Now buy me some salmon)",
+    "thanks": "🎉 Thank you to all contributors! 🐕 (I'm contractually obligated to say that)",
+    "thanksDesc": "🤝 Together we help. Together we pretend to care.",
+    "alreadyContributed": "👥 people have already contributed (and I'm still a cat)"
+  },
+  "navigation": {
+    "home": "🏠 Home (where the magic... and my bed, happens)",
+    "donors": "👥 Contributors (my favourite humans)",
+    "contact": "📞 Contact (if you want to be ignored)"
+  },
+  "footer": {
+    "description": "We help dog shelters. Because the universe has a sense of humour.",
+    "links": "🔗 Links (if you must)",
+    "info": "📋 Information (or what passes for it)",
+    "followUs": "📱 Follow us (and I will judge you silently)",
+    "followUsDesc": "Stay updated on our activities. Or don't. I'm not your mother.",
+    "helpingSince": "📅 Helping since 2020 (and I've been miserable about it ever since)",
+    "rights": "©️ All rights reserved. (I'm very protective of my rights)",
+    "madeWith": "❤️ Made with ❤️ (and a curse) for dogs. And cats. Obviously. We're superior."
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "title": "GoodBoy Foundation - Podporte slovenské útulky pre psov",
+  "subtitle": "Podporte slovenské útulky pre psov",
+  "stats": {
+    "total": "Celková suma",
+    "contributors": "Počet prispievateľov",
+    "shelters": "Útulky"
+  },
+  "donation": {
+    "steps": {
+      "step1": "Krok 1",
+      "step2": "Krok 2",
+      "step3": "Krok 3"
+    },
+    "helpType": "📋 Typ pomoci",
+    "general": "💝 Všeobecný dar pre nadáciu",
+    "specific": "🏠 Dar pre konkrétny útulok",
+    "chooseShelter": "Vyberte útulok *",
+    "chooseAmount": "💶 Vyberte sumu *",
+    "customAmount": "Vlastná suma",
+    "next": "Ďalej →",
+    "donors": "👤 Darcovia",
+    "addDonor": "Pridať darcu",
+    "editDonor": "Upraviť",
+    "deleteDonor": "Odstrániť",
+    "cancel": "Zrušiť",
+    "atLeastOneDonor": "Pridajte aspoň jedného darcu",
+    "consent": "Súhlasím so spracovaním osobných údajov *",
+    "back": "← Späť",
+    "submit": "✅ Poslať dar",
+    "submitting": "Odosielam...",
+    "newDonation": "Nový dar",
+    "success": "✅ Ďakujeme!",
+    "successMessage": "Váš dar bol úspešne zaznamenaný.",
+    "helpingTogether": "Spoločne pomáhame psíkom v núdzi 🐕"
+  },
+  "donor": {
+    "name": "Meno  *",
+    "surname": "Priezvisko *",
+    "email": "Email *",
+    "phone": "Telefón *",
+    "phoneFormat": "Formát: +420 123456789 alebo +421 123456789"
+  },
+  "errors": {
+    "name": {
+      "min": "Meno musí mať aspoň 2 znaky",
+      "max": "Meno môže mať maximálne 20 znakov"
+    },
+    "surname": {
+      "min": "Priezvisko musí mať aspoň 2 znaky",
+      "max": "Priezvisko môže mať maximálne 30 znakov"
+    },
+    "email": {
+      "invalid": "Prosím zadajte platný email",
+      "required": "Email je povinný"
+    },
+    "phone": {
+      "invalid": "Prosím zadajte platné číslo (+420/+421 123456789)"
+    },
+    "amount": {
+      "min": "Minimálna suma je 1 €",
+      "max": "Maximálna suma je 10 000 €"
+    },
+    "consent": "Musíte súhlasiť so spracovaním osobných údajov",
+    "shelter": "Prosím vyberte útulok",
+    "donors": "Prosím pridajte aspoň jedného darcu"
+  },
+  "contact": {
+    "title": "📞 Kontakt",
+    "subtitle": "Spojte sa s nami",
+    "info": "Kontaktné informácie",
+    "address": "Adresa",
+    "phone": "Telefón",
+    "email": "Email",
+    "web": "Web",
+    "hours": "Otváracie hodiny",
+    "weekdays": "Pondelok - Piatok",
+    "saturday": "Sobota",
+    "sunday": "Nedeľa",
+    "closed": "Zatvorené",
+    "emergency": "V prípade núdze nás kontaktujte kedykoľvek na telefónnom čísle +421 900 123 456",
+    "where": "Kde nás nájdete",
+    "whatWeDo": "Komu pomáhame",
+    "shelters": "Útulky",
+    "sheltersDesc": "Podporujeme slovenské útulky pre psov a pomáhame im nájsť nové domovy.",
+    "dogs": "Psíky",
+    "dogsDesc": "Každý dar pomáha konkrétnym psíkom v núdzi poskytnúť starostlivosť.",
+    "cooperation": "Spolupráca",
+    "cooperationDesc": "Spoločne môžeme zmeniť životy psíkov v núdzi k lepšiemu."
+  },
+  "donors": {
+    "title": "👥 Prispievatelia",
+    "subtitle": "Ľudia, ktorí pomáhajú psíkom v núdzi",
+    "totalContributors": "Počet prispievateľov",
+    "totalAmount": "Celková suma",
+    "thanks": "Ďakujeme všetkým prispievateľom! 🐕",
+    "thanksDesc": "Spoločne pomáhame slovenským útulkom a psíkom v núdzi",
+    "alreadyContributed": "ľudí už prispelo"
+  },
+  "navigation": {
+    "home": "Domov",
+    "donors": "Prispievatelia",
+    "contact": "Kontakt"
+  },
+  "footer": {
+    "description": "Pomáhame slovenským útulkom pre psov nájsť nové domovy.",
+    "links": "Odkazy",
+    "info": "Informácie",
+    "followUs": "Sledujte nás",
+    "followUsDesc": "Buďte v obraze o našich aktivitách a pomáhajte spolu s nami.",
+    "helpingSince": "Pomáhame od roku 2020",
+    "rights": "Všetky práva vyhradené.",
+    "madeWith": "Vyrobené s ❤️ pre psíkov v núdzi"
+  }
+}

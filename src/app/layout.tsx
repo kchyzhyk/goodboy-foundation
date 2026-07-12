@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
 import { MantineProvider } from '@mantine/core';
-import { Providers } from './providers';
 import '@mantine/core/styles.css';
 import './globals.css';
 import Header from "@/src/components/layout/Header";
 import Footer from "@/src/components/layout/Footer";
 import React from "react";
+import Providers from "@/src/app/providers";
 
 export const metadata: Metadata = {
     title: {

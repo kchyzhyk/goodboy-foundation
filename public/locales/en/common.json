@@ -1,0 +1,115 @@
+{
+  "title": "GoodBoy Foundation - Support Slovak shelters for dogs",
+  "subtitle": "Support Slovak shelters for dogs",
+  "stats": {
+    "total": "Total amount",
+    "contributors": "Number of contributors",
+    "shelters": "Shelters"
+  },
+  "donation": {
+    "steps": {
+      "step1": "Step 1",
+      "step2": "Step 2",
+      "step3": "Step 3"
+    },
+    "helpType": "📋 Type of help",
+    "general": "💝 General donation for the foundation",
+    "specific": "🏠 Donation for a specific shelter",
+    "chooseShelter": "Select shelter *",
+    "chooseAmount": "💶 Select amount *",
+    "customAmount": "Custom amount",
+    "next": "Next →",
+    "donors": "👤 Donors",
+    "addDonor": "Add donor",
+    "editDonor": "Edit",
+    "deleteDonor": "Delete",
+    "cancel": "Cancel",
+    "atLeastOneDonor": "⚠️ Add at least one donor",
+    "consent": "I agree to the processing of personal data *",
+    "back": "← Back",
+    "submit": "✅ Submit donation",
+    "submitting": "Submitting...",
+    "newDonation": "New donation",
+    "success": "✅ Thank you!",
+    "successMessage": "Your donation has been successfully recorded.",
+    "helpingTogether": "Together we help dogs in need 🐕"
+  },
+  "donor": {
+    "name": "Name",
+    "surname": "Surname *",
+    "email": "Email *",
+    "phone": "Phone *",
+    "phoneFormat": "Format: +420 123456789 or +421 123456789"
+  },
+  "errors": {
+    "name": {
+      "min": "Name must be at least 2 characters",
+      "max": "Name can be maximum 20 characters"
+    },
+    "surname": {
+      "min": "Surname must be at least 2 characters",
+      "max": "Surname can be maximum 30 characters"
+    },
+    "email": {
+      "invalid": "Please enter a valid email address",
+      "required": "Email is required"
+    },
+    "phone": {
+      "invalid": "Please enter a valid phone number (+420/+421 123456789)"
+    },
+    "amount": {
+      "min": "Minimum amount is 1 €",
+      "max": "Maximum amount is 10 000 €"
+    },
+    "consent": "You must agree to the processing of personal data",
+    "shelter": "Please select a shelter",
+    "donors": "Please add at least one donor"
+  },
+  "contact": {
+    "title": "📞 Contact",
+    "subtitle": "Get in touch with us",
+    "info": "Contact information",
+    "address": "Address",
+    "phone": "Phone",
+    "email": "Email",
+    "web": "Website",
+    "hours": "Opening hours",
+    "weekdays": "Monday - Friday",
+    "saturday": "Saturday",
+    "sunday": "Sunday",
+    "closed": "Closed",
+    "emergency": "In case of emergency, contact us anytime at +421 900 123 456",
+    "where": "Where to find us",
+    "whatWeDo": "Who we help",
+    "shelters": "Shelters",
+    "sheltersDesc": "We support Slovak dog shelters and help them find new homes.",
+    "dogs": "Dogs",
+    "dogsDesc": "Every donation helps specific dogs in need get care.",
+    "cooperation": "Cooperation",
+    "cooperationDesc": "Together we can change the lives of dogs in need for the better."
+  },
+  "donors": {
+    "title": "👥 Contributors",
+    "subtitle": "People who help dogs in need",
+    "totalContributors": "Number of contributors",
+    "totalAmount": "Total amount",
+    "thanks": "Thank you to all contributors! 🐕",
+    "thanksDesc": "Together we help Slovak shelters and dogs in need",
+    "alreadyContributed": "people have already contributed"
+  },
+  "navigation": {
+    "home": "Home",
+    "donors": "Contributors",
+    "contact": "Contact"
+  },
+  "footer": {
+    "description": "We help Slovak dog shelters find new homes.",
+    "links": "Links",
+    "info": "Information",
+    "followUs": "Follow us",
+    "followUsDesc": "Stay updated on our activities and help together with us.",
+    "helpingSince": "Helping since 2020",
+    "rights": "All rights reserved.",
+    "madeWith": "Made with ❤️ for dogs in need"
+  }
+}
