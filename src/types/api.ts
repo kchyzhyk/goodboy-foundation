@@ -8,33 +8,25 @@ export interface DonationStats {
     contribution: number;
 }
 
-export interface Donor {
-    firstName: string;
-    lastName: string;
-    email: string;
-    phone: string;
-}
-
-export interface DonorsResponse {
-    contributors: Donor[];
-    shelterID: number;
-    value: number;
-}
-
 export interface ShelterResponse {
     shelters: Shelter[];
 }
 
 export type HelpType = 'general' | 'specific';
 
-export interface DonationFormData {
-    helpType: HelpType;
-    shelterId: number | null;
-    amount: number;
+export interface Donor {
+    id?: string;
     name: string;
     surname: string;
     email: string;
     phone: string;
+}
+
+export interface DonationFormData {
+    helpType: HelpType;
+    shelterId: number | null;
+    amount: number;
+    donors: Donor[];
     consent: boolean;
 }
 

@@ -1,7 +1,6 @@
 import axios from 'axios';
 import {
     DonationStats,
-    DonorsResponse,
     Shelter,
     ShelterResponse,
     SubmitDonationRequest,
@@ -24,14 +23,6 @@ export const getShelters = async (): Promise<Shelter[]> => {
 
 export const getStats = async (): Promise<DonationStats> => {
     const response = await api.get<DonationStats>('/api/v1/shelters/results');
-    return response.data;
-};
-
-export const getDonors = async (shelterId?: number): Promise<DonorsResponse> => {
-    const url = shelterId
-        ? `/api/v1/shelters/contribute?shelterID=${shelterId}`
-        : '/api/v1/shelters/contribute';
-    const response = await api.get<DonorsResponse>(url);
     return response.data;
 };
 

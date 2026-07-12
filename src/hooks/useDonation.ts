@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import {getDonors, getShelters, getStats, submitDonation} from "@/src/services/api";
+import { getShelters, getStats, submitDonation} from "@/src/services/api";
 import {SubmitDonationRequest} from "@/src/types/api";
 
 export const QUERY_KEYS = {
@@ -21,15 +21,6 @@ export const useStats = () => {
         queryKey: QUERY_KEYS.stats,
         queryFn: getStats,
         refetchInterval: 30 * 1000,
-    });
-};
-
-export const useDonors = (shelterId?: number) => {
-    return useQuery({
-        queryKey: [...QUERY_KEYS.donors, shelterId],
-        queryFn: () => getDonors(shelterId),
-        staleTime: 60 * 1000,
-        enabled: !!shelterId,
     });
 };
 

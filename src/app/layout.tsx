@@ -4,10 +4,48 @@ import { Providers } from './providers';
 import '@mantine/core/styles.css';
 import './globals.css';
 import Header from "@/src/components/layout/Header";
+import Footer from "@/src/components/layout/Footer";
+import React from "react";
 
 export const metadata: Metadata = {
-    title: 'GoodBoy Foundation',
-    description: 'Support Slovak shelters for dogs',
+    title: {
+        default: 'GoodBoy Foundation - Podporte slovenské útulky pre psov',
+        template: '%s | GoodBoy Foundation'
+    },
+    description: 'Pomáhame slovenským útulkom pre psov. Prispejte na dobrú vec a podporte psíkov v núdzi.',
+    keywords: 'útulok, psy, pomoc, dar, nadácia, Slovensko, zvieratá',
+    authors: [{ name: 'GoodBoy Foundation' }],
+    creator: 'GoodBoy Foundation',
+    publisher: 'GoodBoy Foundation',
+    robots: {
+        index: true,
+        follow: true,
+    },
+    openGraph: {
+        type: 'website',
+        locale: 'sk_SK',
+        url: 'https://goodboy-foundation.sk',
+        title: 'GoodBoy Foundation - Podporte slovenské útulky pre psov',
+        description: 'Pomáhame slovenským útulkom pre psov. Prispejte na dobrú vec a podporte psíkov v núdzi.',
+        siteName: 'GoodBoy Foundation',
+        images: [
+            {
+                url: '/og-image.jpg',
+                width: 1200,
+                height: 630,
+                alt: 'GoodBoy Foundation',
+            },
+        ],
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'GoodBoy Foundation - Podporte slovenské útulky pre psov',
+        description: 'Pomáhame slovenským útulkom pre psov. Prispejte na dobrú vec a podporte psíkov v núdzi.',
+        images: ['/og-image.jpg'],
+    },
+    icons: {
+        icon: '/favicon.ico',
+    },
 };
 
 export default function RootLayout({
@@ -17,11 +55,12 @@ export default function RootLayout({
 }) {
     return (
         <html lang="sk">
-        <body>
+        <body className="flex flex-col min-h-screen">
         <MantineProvider>
             <Providers>
                 <Header />
-                <main>{children}</main>
+                <main className="flex-1">{children}</main>
+                <Footer />
             </Providers>
         </MantineProvider>
         </body>

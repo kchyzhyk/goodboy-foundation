@@ -8,6 +8,7 @@ interface DonationState {
     isSubmitting: boolean;
     isSuccess: boolean;
     error: string | null;
+
     setField: <K extends keyof DonationFormData>(
         field: K,
         value: DonationFormData[K]
@@ -24,10 +25,7 @@ const initialFormData: DonationFormData = {
     helpType: 'general',
     shelterId: null,
     amount: 0,
-    name: '',
-    surname: '',
-    email: '',
-    phone: '',
+    donors: [],
     consent: false,
 };
 
@@ -61,17 +59,10 @@ export const useDonationStore = create<DonationState>()(
                 })),
 
             setCurrentStep: (step) => set({ currentStep: step }),
-
             setSubmitting: (isSubmitting) => set({ isSubmitting }),
-
             setSuccess: (isSuccess) => set({ isSuccess }),
-
             setError: (error) => set({ error }),
-
-            resetForm: () => set({
-                ...initialState,
-                formData: { ...initialFormData }
-            }),
+            resetForm: () => set({ ...initialState, formData: { ...initialFormData } }),
         }),
         {
             name: 'donation-storage',
