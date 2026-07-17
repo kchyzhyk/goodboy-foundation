@@ -1,42 +1,60 @@
 'use client';
 
 import Link from 'next/link';
-import { IconHeart, IconBrandGithub, IconBrandTwitter, IconBrandInstagram } from '@tabler/icons-react';
+import { IconBrandInstagram, IconBrandFacebook } from '@tabler/icons-react';
 import { useTranslation } from '@/src/hooks/useTranslation';
+import DogIcon from "@/src/components/icons/DogIcon";
+import NavigationButtons from '@/src/components/common/NavigationButtons';
 
-export default function Footer() {
+interface FooterWithNavProps {
+    step: number;
+    onBack?: () => void;
+    onNext?: () => void;
+    nextLabel?: string;
+    hideBack?: boolean;
+    isNextDisabled?: boolean;
+    isLoading?: boolean;
+}
+
+export default function Footer({
+                                          onBack,
+                                          onNext,
+                                          nextLabel = 'Pokračovať →',
+                                          hideBack = false,
+                                          isNextDisabled = false,
+                                          isLoading = false,
+                                      }: FooterWithNavProps) {
     const { t } = useTranslation();
-    const currentYear = new Date().getFullYear();
 
     return (
-        <footer className="bg-white/90 backdrop-blur-sm border-t border-gray-200 mt-auto">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-                    {/* Logo */}
-                    <div className="md:col-span-1">
-                        <div className="flex items-center gap-2 text-lg font-bold text-gray-900">
-                            <span>🐕</span>
-                            <span>
-                                GoodBoy<span className="text-blue-600">Foundation</span>
-                            </span>
-                        </div>
-                        <p className="mt-2 text-sm text-gray-600">
-                            {t('footer.description')}
-                        </p>
-                        <div className="flex gap-3 mt-4">
+        <footer className="w-full bg-white border-t border-gray-100 mt-10">
+            <div className="max-w-7xl mx-auto py-4">
+                {/* Navigation Buttons */}
+                <div className="mb-4">
+                    <NavigationButtons
+                        onBack={onBack}
+                        onNext={onNext}
+                        nextLabel={nextLabel}
+                        hideBack={hideBack}
+                        isNextDisabled={isNextDisabled}
+                        isLoading={isLoading}
+                    />
+                </div>
+
+                <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                    <div className="flex items-center gap-2 text-lg font-bold text-gray-900">
+                        <DogIcon size={24} className="text-blue-600" />
+                        <span>GoodBoy</span>
+                    </div>
+
+                    <div className="flex items-center gap-6">
+                        <div className="flex gap-3">
                             <a
                                 href="#"
                                 className="text-gray-400 hover:text-blue-600 transition-colors"
-                                aria-label="GitHub"
+                                aria-label="Facebook"
                             >
-                                <IconBrandGithub size={20} />
-                            </a>
-                            <a
-                                href="#"
-                                className="text-gray-400 hover:text-blue-400 transition-colors"
-                                aria-label="Twitter"
-                            >
-                                <IconBrandTwitter size={20} />
+                                <IconBrandFacebook size={20} />
                             </a>
                             <a
                                 href="#"
@@ -46,60 +64,21 @@ export default function Footer() {
                                 <IconBrandInstagram size={20} />
                             </a>
                         </div>
-                    </div>
-
-                    {/* Links */}
-                    <div>
-                        <h3 className="font-semibold text-gray-900 mb-3">{t('footer.links')}</h3>
-                        <ul className="space-y-2 text-sm">
-                            <li>
-                                <Link href="/" className="text-gray-600 hover:text-blue-600 transition-colors">
-                                    {t('navigation.home')}
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="/donors" className="text-gray-600 hover:text-blue-600 transition-colors">
-                                    {t('navigation.donors')}
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="/kontakt" className="text-gray-600 hover:text-blue-600 transition-colors">
-                                    {t('navigation.contact')}
-                                </Link>
-                            </li>
-                        </ul>
-                    </div>
-
-                    {/* Info */}
-                    <div>
-                        <h3 className="font-semibold text-gray-900 mb-3">{t('footer.info')}</h3>
-                        <ul className="space-y-2 text-sm">
-                            <li className="text-gray-600">Hlavná 123</li>
-                            <li className="text-gray-600">811 01 Bratislava</li>
-                            <li className="text-gray-600">info@goodboy-foundation.sk</li>
-                        </ul>
-                    </div>
-
-                    {/* Follow Us */}
-                    <div>
-                        <h3 className="font-semibold text-gray-900 mb-3">{t('footer.followUs')}</h3>
-                        <p className="text-sm text-gray-600">
-                            {t('footer.followUsDesc')}
-                        </p>
-                        <div className="mt-3 flex items-center gap-1 text-sm text-gray-600">
-                            <IconHeart size={16} className="text-red-500 fill-red-500" />
-                            <span>{t('footer.helpingSince')}</span>
+                        <div className="flex gap-6 text-sm">
+                            <Link
+                                href="/kontakt"
+                                className="text-[#4B5563] hover:text-blue-600 transition-colors text-base leading-6 font-normal"
+                            >
+                                {t('navigation.contact')}
+                            </Link>
+                            <Link
+                                href="/about"
+                                className="text-[#4B5563] hover:text-blue-600 transition-colors text-base leading-6 font-normal"
+                            >
+                                O projekte
+                            </Link>
                         </div>
                     </div>
-                </div>
-
-                <div className="mt-8 pt-8 border-t border-gray-200 text-center text-sm text-gray-500">
-                    <p>
-                        © {currentYear} GoodBoy Foundation. {t('footer.rights')}
-                        <span className="hidden sm:inline"> | </span>
-                        <br className="sm:hidden" />
-                        {t('footer.madeWith')}
-                    </p>
                 </div>
             </div>
         </footer>

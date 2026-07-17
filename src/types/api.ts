@@ -47,3 +47,13 @@ export interface SubmitDonationResponse {
         type: 'SUCCESS' | 'ERROR' | 'WARNING';
     }>;
 }
+
+export interface NavigationButtonsProps {
+    onBack?: () => void;
+    onNext?: () => void;
+    nextLabel?: string;
+    backLabel?: string;
+    hideBack?: boolean;
+    isNextDisabled?: boolean;
+    isLoading?: boolean;
+}
