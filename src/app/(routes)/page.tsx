@@ -143,6 +143,13 @@ export default function HomePage() {
                             ))}
                         </div>
 
+                        {/*<div className="image-column-mobile">*/}
+                        {/*    <img*/}
+                        {/*        src="/images/good-doggo-1.jpg"*/}
+                        {/*        alt="Good boy dog"*/}
+                        {/*    />*/}
+                        {/*</div>*/}
+
                         <div className="form-spacing">
                             {step === 1 && (
                                 <>
@@ -187,9 +194,9 @@ export default function HomePage() {
                                                             Prispieť celej nadácii
                                                         </button>
                                                     </div>
-                                                    {errors.helpType && (
-                                                        <p className="text-red-500 text-sm mt-1">{errors.helpType.message}</p>
-                                                    )}
+                                                    <p className={`text-sm mt-1 ${errors.helpType ? 'text-red-500' : 'text-transparent'}`}>
+                                                        {errors.helpType?.message}
+                                                    </p>
                                                 </div>
                                             )}
                                         />
@@ -211,7 +218,7 @@ export default function HomePage() {
                                                     render={({field}) => (
                                                         <div>
                                                             <select
-                                                                className={`select-custom ${errors.shelterId ? 'border-red-500' : ''}`}
+                                                                className={`select-custom ${errors.shelterId ? 'border-red-500' : 'text-transparent'}`}
                                                                 value={field.value || ''}
                                                                 onChange={(e) => {
                                                                     const value = e.target.value ? parseInt(e.target.value) : null;
@@ -228,9 +235,9 @@ export default function HomePage() {
                                                                     <option key={s.id} value={s.id}>{s.name}</option>
                                                                 ))}
                                                             </select>
-                                                            {errors.shelterId && (
-                                                                <p className="text-red-500 text-sm mt-1">{errors.shelterId.message}</p>
-                                                            )}
+                                                            <p className={`text-sm mt-1 ${errors.shelterId ? 'text-red-500' : 'text-transparent'}`}>
+                                                                {errors.shelterId?.message}
+                                                            </p>
                                                         </div>
                                                     )}
                                                 />
@@ -251,7 +258,7 @@ export default function HomePage() {
                                                             <input
                                                                 ref={amountInputRef}
                                                                 type="number"
-                                                                className={`amount-input ${errors.amount ? 'border-red-500' : ''}`}
+                                                                className={`amount-input ${errors.amount ? 'border-red-500' : 'text-transparent'}`}
                                                                 value={field.value || ''}
                                                                 onChange={(e) => {
                                                                     const val = parseFloat(e.target.value) || 0;
@@ -282,9 +289,9 @@ export default function HomePage() {
                                                             </button>
                                                         ))}
                                                     </div>
-                                                    {errors.amount && (
-                                                        <p className="text-red-500 text-sm">{errors.amount.message}</p>
-                                                    )}
+                                                    <p className={`text-sm mt-1 ${errors.amount ? 'text-red-500' : 'text-transparent'}`}>
+                                                        {errors.amount?.message}
+                                                    </p>
                                                 </div>
                                             )}
                                         />
@@ -326,9 +333,9 @@ export default function HomePage() {
                                                                 onChange={field.onChange}
                                                                 onBlur={field.onBlur}
                                                             />
-                                                            {errors.name && (
-                                                                <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
-                                                            )}
+                                                            <p className={`text-sm mt-1 ${errors.name ? 'text-red-500' : 'text-transparent'}`}>
+                                                                {errors.name?.message}
+                                                            </p>
                                                         </div>
                                                     )}
                                                 />
@@ -355,9 +362,9 @@ export default function HomePage() {
                                                                 onChange={field.onChange}
                                                                 onBlur={field.onBlur}
                                                             />
-                                                            {errors.surname && (
-                                                                <p className="text-red-500 text-sm mt-1">{errors.surname.message}</p>
-                                                            )}
+                                                            <p className={`text-sm mt-1 ${errors.surname ? 'text-red-500' : 'text-transparent'}`}>
+                                                                {errors.surname?.message}
+                                                            </p>
                                                         </div>
                                                     )}
                                                 />
@@ -385,9 +392,9 @@ export default function HomePage() {
                                                             onChange={field.onChange}
                                                             onBlur={field.onBlur}
                                                         />
-                                                        {errors.email && (
-                                                            <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
-                                                        )}
+                                                        <p className={`text-sm mt-1 ${errors.email ? 'text-red-500' : 'text-transparent'}`}>
+                                                            {errors.email?.message}
+                                                        </p>
                                                     </div>
                                                 )}
                                             />
@@ -463,9 +470,9 @@ export default function HomePage() {
                                                                 onBlur={field.onBlur}
                                                             />
                                                         </div>
-                                                        {errors.phone && (
-                                                            <p className="text-red-500 text-sm mt-1">{errors.phone.message}</p>
-                                                        )}
+                                                        <p className={`text-sm mt-1 ${errors.phone ? 'text-red-500' : 'text-transparent'}`}>
+                                                            {errors.phone?.message}
+                                                        </p>
                                                     </div>
                                                 )}
                                             />
@@ -534,9 +541,9 @@ export default function HomePage() {
                                                             Súhlasím so spracovaním mojich osobných údajov
                                                         </span>
                                                     </label>
-                                                    {errors.consent && (
-                                                        <p className="text-red-500 text-sm mt-1">{errors.consent.message}</p>
-                                                    )}
+                                                    <p className={`text-sm mt-1 ${errors.consent ? 'text-red-500' : 'text-transparent'}`}>
+                                                        {errors.consent?.message || ' '}
+                                                    </p>
                                                 </div>
                                             )}
                                         />

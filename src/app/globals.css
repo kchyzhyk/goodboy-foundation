@@ -167,10 +167,9 @@ body {
     width: 100%;
     max-width: 1280px;
     height: 100%;
-    /*max-height: 1024px;*/
     max-height: 100vh;
     padding: 20px 10px 10px 10px;
-    gap: 80px;
+    gap: 20px;
     align-items: stretch;
 }
 
@@ -180,6 +179,14 @@ body {
     flex-direction: column;
     height: 100%;
     overflow-y: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.column-left::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;
 }
 
 .image-column {
@@ -196,9 +203,13 @@ body {
     max-height:100vh;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 769px) {
     .image-column {
         display: flex;
+    }
+
+    .columns-wrapper {
+        gap: 80px;
     }
 }
 
