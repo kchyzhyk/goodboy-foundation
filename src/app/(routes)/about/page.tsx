@@ -1,36 +1,83 @@
 'use client';
 
-import { useTranslation } from '@/src/hooks/useTranslation';
-import { useStats } from '@/src/hooks/useDonation';
+import Link from "next/link";
+import {Card, Container, Grid, Title, Text} from "@mantine/core";
+import {IconArrowLeft} from "@tabler/icons-react";
+import Footer from "@/src/components/layout/Footer";
 
 export default function AboutPage() {
-    const { t } = useTranslation();
-    const { data: stats, isLoading } = useStats();
 
     return (
-        <div className="max-w-3xl mx-auto px-4 py-12">
-            <h1 className="text-3xl font-bold text-center mb-8">🐕 O projekte</h1>
+        <Container size="lg" py="xl">
+            <Link
+                href="/"
+                className="inline-flex items-center gap-2 transition-colors  mb-10 figma-button-text back-btn"
+            >
+                <IconArrowLeft size={20} className="back-btn"/>
+                Späť
+            </Link>
 
-            <div className="prose prose-lg max-w-none">
-                <p className="text-gray-700 leading-relaxed">
-                    {t('about.text')}
-                </p>
-            </div>
+            <Title order={1} className="text-left mb-10">
+                O projekte
+            </Title>
 
-            <div className="grid grid-cols-2 gap-6 mt-10">
-                <div className="bg-gray-50 rounded-xl p-6 text-center">
-                    <p className="text-3xl font-bold text-gray-900">
-                        {isLoading ? '...' : `${stats?.contribution || 0} €`}
-                    </p>
-                    <p className="text-sm text-gray-500">{t('stats.total')}</p>
-                </div>
-                <div className="bg-gray-50 rounded-xl p-6 text-center">
-                    <p className="text-3xl font-bold text-gray-900">
-                        {isLoading ? '...' : stats?.contributors || 0}
-                    </p>
-                    <p className="text-sm text-gray-500">{t('stats.contributors')}</p>
-                </div>
-            </div>
-        </div>
+            <Grid mt="xl" className="w-full mb-10 gap-8">
+                <Grid.Col>
+                    <Card padding="lg" className="h-full w-full">
+                        <div className="flex flex-col items-center justify-center">
+                            <Text size="sm" className=" desc-text">
+                                Nadácia Good Boy sa venuje zlepšovaniu života psov v Žiline na Slovensku. Zachraňujeme
+                                opustené, týrané a bezdomovské psy, poskytujeme im lekársku starostlivosť, útočisko a
+                                lásku, ktorú si zaslúžia. Naším poslaním je dať týmto verným spoločníkom druhú šancu na
+                                život tým, že im nájdeme milujúci domov. Okrem záchrany a rehabilitácie sa zameriavame
+                                aj na podporu zodpovedného vlastníctva zvierat a ochrany zvierat prostredníctvom
+                                vzdelávacích a komunitných programov.
+                            </Text>
+                        </div>
+                    </Card>
+                </Grid.Col>
+            </Grid>
+            <Grid className="w-full mb-10 gap-4 border-t-2 border-gray-200 border-b-2 py-16">
+                <Grid.Col span={{base: 12, md: 6}}>
+                    <Card padding="lg" className="h-full w-full">
+                        <div className="flex flex-col items-center justify-center text-center">
+                            <Title order={4} mb="sm" className='mb-3 count-text'>12 200 €</Title>
+                            <Text size="sm" className="text-center count-desc">
+                                Celková vyzbieraná hodnota
+                            </Text>
+                        </div>
+                    </Card>
+                </Grid.Col>
+                <Grid.Col span={{base: 12, md: 6}}>
+                    <Card padding="lg" className="h-full w-full">
+                        <div className="flex flex-col items-center justify-center text-center">
+                            <Title order={4} mb="sm" className='mb-3 count-text'>1 028</Title>
+                            <Text size="sm" className="text-center count-desc">
+                                Počet darcov
+                            </Text>
+                        </div>
+                    </Card>
+                </Grid.Col>
+            </Grid>
+            <Grid mt="xl" className="w-full mb-10 gap-8">
+                <Grid.Col>
+                    <Card padding="lg" className="h-full w-full">
+                        <div className="flex flex-col items-center justify-center">
+                            <Text size="sm" className=" desc-text">
+                                Naša práca je možná vďaka podpore vášnivých dobrovoľníkov, štedrých darcov a komunity,
+                                ktorá sa hlboko stará o dobro zvierat. Organizujeme aj kastračné a sterilizačné
+                                iniciatívy, aby sme riešili problém túlavých psov a zabezpečili dlhodobý vplyv. V
+                                nadácii Good Boy veríme, že každý pes si zaslúži bezpečný, milujúci domov a šťastný
+                                život. Pridajte sa k nám a pomôžte nám robiť zmeny – či už dobrovoľníctvom, darovaním
+                                alebo adopciou chlpatého priateľa. Spoločne môžeme vytvoriť lepšiu budúcnosť pre psy v
+                                Žiline.
+                            </Text>
+                        </div>
+                    </Card>
+                </Grid.Col>
+            </Grid>
+            <Footer/>
+        </Container>
+
     );
 }

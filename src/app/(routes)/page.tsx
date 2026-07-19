@@ -53,8 +53,6 @@ export default function HomePage() {
     const selectedShelterName = shelters?.find(s => s.id === shelterId)?.name || 'Nezvolený';
 
     const onSubmit = (data: DonationFormSchemaType) => {
-
-        console.log('📤 onSubmit called with:', data);
         const apiData: SubmitDonationRequest = {
             contributors: [
                 {
@@ -70,12 +68,11 @@ export default function HomePage() {
             apiData.shelterID = data.shelterId;
         }
 
-
         submitDonation(apiData, {
             onSuccess: (response) => {
                 console.log('✅ Success:', response);
-                setIsSuccess(true); // 👈 показываем карточку успеха
-                setStep(4); // 👈 переходим на шаг 4
+                setIsSuccess(true);
+                setStep(4);
             },
             onError: (error: any) => {
                 console.error('❌ Error:', error);
@@ -132,8 +129,8 @@ export default function HomePage() {
                                                         : 'text-[#111827] opacity-10'
                                             }`}
                                         >
-                    {s.label}
-                </span>
+                                            {s.label}
+                                        </span>
                                     </div>
                                     {index < steps.length - 1 && (
                                         <div
@@ -572,7 +569,6 @@ export default function HomePage() {
                                         onClick={() => {
                                             setStep(1);
                                             setIsSuccess(false);
-                                            // Сброс формы
                                             reset();
                                         }}
                                     >
@@ -581,25 +577,20 @@ export default function HomePage() {
                                 </div>
                             )}
 
-                            {!isSuccess ?
+                            {!isSuccess &&
 
                                 <div className="mb-4">
                                     <NavigationButtons
                                         onBack={step === 1 ? undefined : () => setStep(step - 1)}
                                         onNext={async () => {
-                                            console.log('🔵 onNext called, step:', step);
                                             if (step === 1) {
                                                 const isValid = await trigger(['helpType', 'shelterId', 'amount']);
-                                                console.log('Step 1 isValid:', isValid, 'errors:', errors);
                                                 if (isValid) setStep(2);
                                             } else if (step === 2) {
                                                 const isValid = await trigger(['name', 'surname', 'email', 'phone']);
-                                                console.log('Step 2 isValid:', isValid, 'errors:', errors);
                                                 if (isValid) setStep(3);
                                             } else if (step === 3) {
-                                                console.log('🔵 Calling handleSubmit(onSubmit)');
-                                                console.log('Current errors:', errors); // 👈 добавить
-                                                handleSubmit(onSubmit)();
+                                                await handleSubmit(onSubmit)();
                                             }
                                         }}
                                         hideBack={step === 1}
@@ -607,7 +598,6 @@ export default function HomePage() {
                                         isLoading={isPending}
                                     />
                                 </div>
-                                : <></>
                             }
 
 
