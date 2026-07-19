@@ -4,16 +4,20 @@ import {useEffect, useRef, useState} from 'react';
 import {useForm, Controller} from 'react-hook-form';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {DonationFormSchemaType, donationSchema} from '@/src/schemas/donationSchema';
-import {useShelters} from '@/src/hooks/useDonation';
+import {useShelters, useSubmitDonation} from '@/src/hooks/useDonation';
 import {useDonationStore} from '@/src/store/donationStore';
 import {IconCurrencyEuro} from "@tabler/icons-react";
 import Footer from "@/src/components/layout/Footer";
+import NavigationButtons from "@/src/components/common/NavigationButtons";
+import {SubmitDonationRequest} from "@/src/types/api";
 
 export default function HomePage() {
     const [step, setStep] = useState(1);
+    const [isSuccess, setIsSuccess] = useState(false);
     const amountInputRef = useRef<HTMLInputElement>(null);
     const {data: shelters, isLoading: sheltersLoading} = useShelters();
     const {setField} = useDonationStore();
+    const {mutate: submitDonation, isPending} = useSubmitDonation();
 
     const {
         control,
@@ -21,6 +25,7 @@ export default function HomePage() {
         formState: {errors},
         watch,
         trigger,
+        reset
     } = useForm<DonationFormSchemaType>({
         resolver: zodResolver(donationSchema),
         defaultValues: {
@@ -45,11 +50,39 @@ export default function HomePage() {
     const phone = watch('phone');
     const presetAmounts = [5, 10, 20, 30, 50, 100];
 
-    // Находим название приюта по ID
     const selectedShelterName = shelters?.find(s => s.id === shelterId)?.name || 'Nezvolený';
 
     const onSubmit = (data: DonationFormSchemaType) => {
-        console.log('submit', data);
+
+        console.log('📤 onSubmit called with:', data);
+        const apiData: SubmitDonationRequest = {
+            contributors: [
+                {
+                    firstName: data.name || '',
+                    lastName: data.surname || '',
+                    email: data.email,
+                    phone: data.phone,
+                }
+            ],
+            value: data.amount,
+        };
+        if (data.helpType === 'specific' && data.shelterId) {
+            apiData.shelterID = data.shelterId;
+        }
+
+
+        submitDonation(apiData, {
+            onSuccess: (response) => {
+                console.log('✅ Success:', response);
+                setIsSuccess(true); // 👈 показываем карточку успеха
+                setStep(4); // 👈 переходим на шаг 4
+            },
+            onError: (error: any) => {
+                console.error('❌ Error:', error);
+                const errorMessage = error.response?.data?.messages?.[0]?.message || 'Chyba pri odosielaní. Skúste to prosím neskôr.';
+                alert(errorMessage);
+            },
+        });
     };
 
     const steps = [
@@ -84,7 +117,7 @@ export default function HomePage() {
                                                 step === s.id
                                                     ? 'bg-[#4F46E5] text-white border-[#4F46E5]'
                                                     : step > s.id
-                                                        ? 'bg-green-500 text-white border-green-500'
+                                                        ? 'bg-transparent text-[#4F46E5] border-[#4F46E5]'
                                                         : 'border-[#D1D5DB] text-gray-400 opacity-20 bg-transparent'
                                             }`}
                                         >
@@ -94,16 +127,18 @@ export default function HomePage() {
                                             className={`figma-stepper-text whitespace-nowrap ${
                                                 step === s.id
                                                     ? 'figma-stepper-text-active'
-                                                    : 'text-[#111827] opacity-10'
+                                                    : step > s.id
+                                                        ? 'passed-step'
+                                                        : 'text-[#111827] opacity-10'
                                             }`}
                                         >
-                                            {s.label}
-                                        </span>
+                    {s.label}
+                </span>
                                     </div>
                                     {index < steps.length - 1 && (
                                         <div
                                             className={`h-0.5 flex-1 mx-2 ${
-                                                step > s.id ? 'bg-green-500' : 'bg-[#D1D5DB]'
+                                                step > s.id ? 'bg-[#4F46E5]' : 'bg-[#D1D5DB]'
                                             }`}
                                         />
                                     )}
@@ -124,7 +159,8 @@ export default function HomePage() {
                                             control={control}
                                             render={({field}) => (
                                                 <div>
-                                                    <div className="flex items-center p-1 rounded-xl border border-gray-200 gap-2">
+                                                    <div
+                                                        className="flex items-center p-1 rounded-xl border border-gray-200 gap-2">
                                                         <button
                                                             type="button"
                                                             className={`flex-1 py-4 px-2 rounded-lg figma-button-text transition-all ${
@@ -187,7 +223,8 @@ export default function HomePage() {
                                                                 }}
                                                                 disabled={sheltersLoading}
                                                             >
-                                                                <option value="" disabled className="select-placeholder">
+                                                                <option value="" disabled
+                                                                        className="select-placeholder">
                                                                     Vyberte útulok zo zoznamu
                                                                 </option>
                                                                 {shelters?.map((s) => (
@@ -205,7 +242,8 @@ export default function HomePage() {
                                     )}
 
                                     <div className='mb-12'>
-                                        <p className="figma-label mb-4 figma-label-semibold">Suma, ktorou chcem prispieť</p>
+                                        <p className="figma-label mb-4 figma-label-semibold">Suma, ktorou chcem
+                                            prispieť</p>
                                         <Controller
                                             name="amount"
                                             control={control}
@@ -264,31 +302,69 @@ export default function HomePage() {
                                     </h2>
 
                                     <div className="space-y-4">
-                                        <div>
-                                            <label className="figma-label mb-1 block">
-                                                Meno
-                                            </label>
-                                            <Controller
-                                                name="name"
-                                                control={control}
-                                                render={({field}) => (
-                                                    <div>
-                                                        <input
-                                                            type="text"
-                                                            className={`w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent figma-body ${
-                                                                errors.name ? 'border-red-500' : ''
-                                                            }`}
-                                                            placeholder="Zadajte Vaše meno"
-                                                            value={field.value || ''}
-                                                            onChange={field.onChange}
-                                                            onBlur={field.onBlur}
-                                                        />
-                                                        {errors.name && (
-                                                            <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
-                                                        )}
-                                                    </div>
-                                                )}
-                                            />
+
+                                        <label className="figma-label mb-1 block">
+                                            O vás
+                                        </label>
+
+                                        <div className="grid grid-cols-2 gap-4">
+                                            <div>
+                                                <label className="figma-label mb-1 block">
+                                                    Meno
+                                                </label>
+                                                <Controller
+                                                    name="name"
+                                                    control={control}
+                                                    render={({field}) => (
+                                                        <div>
+                                                            <input
+                                                                type="text"
+                                                                className={`w-full p-3 border-2 rounded-xl figma-body outline-none transition-colors bg-[#F3F4F6] ${
+                                                                    errors.name
+                                                                        ? 'border-red-500'
+                                                                        : 'border-gray-200 focus:border-[#3b82f6]'
+                                                                }`}
+                                                                placeholder="Zadajte Vaše meno"
+                                                                value={field.value || ''}
+                                                                onChange={field.onChange}
+                                                                onBlur={field.onBlur}
+                                                            />
+                                                            {errors.name && (
+                                                                <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
+                                                            )}
+                                                        </div>
+                                                    )}
+                                                />
+                                            </div>
+
+                                            <div>
+                                                <label className="figma-label mb-1 block">
+                                                    Priezvisko
+                                                </label>
+                                                <Controller
+                                                    name="surname"
+                                                    control={control}
+                                                    render={({field}) => (
+                                                        <div>
+                                                            <input
+                                                                type="text"
+                                                                className={`w-full p-3 border-2 rounded-xl figma-body outline-none transition-colors bg-[#F3F4F6] ${
+                                                                    errors.surname
+                                                                        ? 'border-red-500'
+                                                                        : 'border-gray-200 focus:border-[#3b82f6]'
+                                                                }`}
+                                                                placeholder="Zadajte Vaše priezvisko"
+                                                                value={field.value || ''}
+                                                                onChange={field.onChange}
+                                                                onBlur={field.onBlur}
+                                                            />
+                                                            {errors.surname && (
+                                                                <p className="text-red-500 text-sm mt-1">{errors.surname.message}</p>
+                                                            )}
+                                                        </div>
+                                                    )}
+                                                />
+                                            </div>
                                         </div>
 
                                         <div>
@@ -302,8 +378,10 @@ export default function HomePage() {
                                                     <div>
                                                         <input
                                                             type="email"
-                                                            className={`w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent figma-body ${
-                                                                errors.email ? 'border-red-500' : ''
+                                                            className={`w-full p-3 border-2 rounded-xl figma-body outline-none transition-colors bg-[#F3F4F6] ${
+                                                                errors.email
+                                                                    ? 'border-red-500'
+                                                                    : 'border-gray-200 focus:border-[#3b82f6]'
                                                             }`}
                                                             placeholder="Zadajte Váš e-mail"
                                                             value={field.value || ''}
@@ -327,16 +405,67 @@ export default function HomePage() {
                                                 control={control}
                                                 render={({field}) => (
                                                     <div>
-                                                        <input
-                                                            type="tel"
-                                                            className={`w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent figma-body ${
-                                                                errors.phone ? 'border-red-500' : ''
-                                                            }`}
-                                                            placeholder="+420 123 321 123"
-                                                            value={field.value || ''}
-                                                            onChange={field.onChange}
-                                                            onBlur={field.onBlur}
-                                                        />
+                                                        <div className="flex items-center gap-2">
+                                                            <div className="relative w-[130px]">
+                                                                <select
+                                                                    className="w-full h-14 pl-3 pr-8 border-2 rounded-xl figma-body outline-none transition-colors bg-[#F3F4F6] border-gray-200 focus:border-[#3b82f6] appearance-none cursor-pointer"
+                                                                    value={field.value?.match(/^\+\d{3}/)?.[0] || '+421'}
+                                                                    onChange={(e) => {
+                                                                        const newCode = e.target.value;
+                                                                        const currentNumber = field.value?.replace(/^\+\d{3}\s?/, '') || '';
+                                                                        field.onChange(`${newCode} ${currentNumber}`);
+                                                                    }}
+                                                                >
+                                                                    <option value="+420">🇨🇿 +420</option>
+                                                                    <option value="+421">🇸🇰 +421</option>
+                                                                </select>
+                                                                <svg className="absolute right-2 top-1/2 -translate-y-1/2 w-3 h-3 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                                                                </svg>
+                                                            </div>
+                                                            <input
+                                                                type="tel"
+                                                                className={`flex-1 p-3 border-2 rounded-xl figma-body outline-none transition-colors bg-[#F3F4F6] ${
+                                                                    errors.phone
+                                                                        ? 'border-red-500'
+                                                                        : 'border-gray-200 focus:border-[#3b82f6]'
+                                                                }`}
+                                                                placeholder="+421 123 456 789"
+                                                                value={field.value || ''}
+                                                                onChange={(e) => {
+                                                                    const rawValue = e.target.value.replace(/\s/g, '');
+                                                                    const codeMatch = rawValue.match(/^(\+420|\+421)/);
+                                                                    if (codeMatch) {
+                                                                        const detectedCode = codeMatch[0];
+                                                                        const number = rawValue.replace(detectedCode, '');
+                                                                        const formattedNumber = number.replace(/(\d{3})(\d{3})(\d{3})/, '$1 $2 $3');
+                                                                        field.onChange(`${detectedCode} ${formattedNumber}`);
+                                                                    } else {
+                                                                        const currentCode = field.value?.match(/^\+\d{3}/)?.[0] || '+421';
+                                                                        const formattedNumber = rawValue.replace(/(\d{3})(\d{3})(\d{3})/, '$1 $2 $3');
+                                                                        field.onChange(`${currentCode} ${formattedNumber}`);
+                                                                    }
+                                                                }}
+                                                                onPaste={(e) => {
+                                                                    setTimeout(() => {
+                                                                        const input = e.target as HTMLInputElement;
+                                                                        const rawValue = input.value.replace(/[^\d+]/g, '');
+                                                                        const codeMatch = rawValue.match(/^(\+420|\+421)/);
+                                                                        if (codeMatch) {
+                                                                            const detectedCode = codeMatch[0];
+                                                                            const number = rawValue.replace(detectedCode, '');
+                                                                            const formattedNumber = number.replace(/(\d{3})(\d{3})(\d{3})/, '$1 $2 $3');
+                                                                            field.onChange(`${detectedCode} ${formattedNumber}`);
+                                                                        } else {
+                                                                            const currentCode = field.value?.match(/^\+\d{3}/)?.[0] || '+421';
+                                                                            const formattedNumber = rawValue.replace(/(\d{3})(\d{3})(\d{3})/, '$1 $2 $3');
+                                                                            field.onChange(`${currentCode} ${formattedNumber}`);
+                                                                        }
+                                                                    }, 10);
+                                                                }}
+                                                                onBlur={field.onBlur}
+                                                            />
+                                                        </div>
                                                         {errors.phone && (
                                                             <p className="text-red-500 text-sm mt-1">{errors.phone.message}</p>
                                                         )}
@@ -417,27 +546,74 @@ export default function HomePage() {
                                     </div>
                                 </>
                             )}
+
+                            {step === 4 && (
+                                <div className="flex flex-col items-center justify-center py-12">
+                                    <div
+                                        className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6">
+                                        <svg className="w-10 h-10 text-green-600" fill="none" stroke="currentColor"
+                                             viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                                                  d="M5 13l4 4L19 7"/>
+                                        </svg>
+                                    </div>
+                                    <h2 className="figma-heading-32 text-center mb-4">
+                                        ✅ Ďakujeme!
+                                    </h2>
+                                    <p className="figma-body text-gray-600 text-center max-w-md mb-2">
+                                        Váš dar bol úspešne odoslaný.
+                                    </p>
+                                    <p className="figma-body text-gray-500 text-center max-w-md">
+                                        Spoločne pomáhame psíkom v núdzi. 🐕
+                                    </p>
+                                    <button
+                                        type="button"
+                                        className="mt-8 px-8 py-3 bg-[#4F46E5] text-white rounded-lg hover:bg-[#4338CA] transition figma-button-text"
+                                        onClick={() => {
+                                            setStep(1);
+                                            setIsSuccess(false);
+                                            // Сброс формы
+                                            reset();
+                                        }}
+                                    >
+                                        Nový dar
+                                    </button>
+                                </div>
+                            )}
+
+                            {!isSuccess ?
+
+                                <div className="mb-4">
+                                    <NavigationButtons
+                                        onBack={step === 1 ? undefined : () => setStep(step - 1)}
+                                        onNext={async () => {
+                                            console.log('🔵 onNext called, step:', step);
+                                            if (step === 1) {
+                                                const isValid = await trigger(['helpType', 'shelterId', 'amount']);
+                                                console.log('Step 1 isValid:', isValid, 'errors:', errors);
+                                                if (isValid) setStep(2);
+                                            } else if (step === 2) {
+                                                const isValid = await trigger(['name', 'surname', 'email', 'phone']);
+                                                console.log('Step 2 isValid:', isValid, 'errors:', errors);
+                                                if (isValid) setStep(3);
+                                            } else if (step === 3) {
+                                                console.log('🔵 Calling handleSubmit(onSubmit)');
+                                                console.log('Current errors:', errors); // 👈 добавить
+                                                handleSubmit(onSubmit)();
+                                            }
+                                        }}
+                                        hideBack={step === 1}
+                                        nextLabel={step === 3 ? 'Odoslať formulár' : 'Pokračovať →'}
+                                        isLoading={isPending}
+                                    />
+                                </div>
+                                : <></>
+                            }
+
+
                         </div>
 
-                        <Footer
-                            step={step}
-                            onBack={step === 1 ? undefined : () => setStep(step - 1)}
-                            onNext={async () => {
-                                if (step === 1) {
-                                    const isValid = await trigger(['helpType', 'shelterId', 'amount']);
-                                    if (isValid) setStep(2);
-                                } else if (step === 2) {
-                                    const isValid = await trigger(['name', 'email', 'phone']);
-                                    if (isValid) setStep(3);
-                                } else if (step === 3) {
-                                    handleSubmit(onSubmit)();
-                                }
-                            }}
-                            hideBack={step === 1}
-                            nextLabel={step === 3 ? 'Odoslať formulár' : 'Pokračovať →'}
-                            isNextDisabled={step === 3 ? false : false}
-                            isLoading={false}
-                        />
+                        <Footer/>
                     </div>
 
                     <div className="image-column">

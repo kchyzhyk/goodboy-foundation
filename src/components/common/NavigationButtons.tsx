@@ -7,7 +7,6 @@ export default function NavigationButtons({
                                               nextLabel = 'Pokračovať →',
                                               backLabel = '← Späť',
                                               hideBack = false,
-                                              isNextDisabled = false,
                                               isLoading = false,
                                           }: NavigationButtonsProps) {
     return (
@@ -28,7 +27,7 @@ export default function NavigationButtons({
                 type="button"
                 className="w-[179px] h-14 px-8 py-4 bg-[#4F46E5] text-white rounded-lg hover:bg-[#4338CA] transition figma-button-text flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 onClick={onNext}
-                disabled={isNextDisabled || isLoading}
+                disabled={isLoading}
             >
                 {isLoading ? 'Načítavam...' : nextLabel}
             </button>

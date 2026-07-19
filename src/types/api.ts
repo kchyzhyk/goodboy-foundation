@@ -54,6 +54,5 @@ export interface NavigationButtonsProps {
     nextLabel?: string;
     backLabel?: string;
     hideBack?: boolean;
-    isNextDisabled?: boolean;
     isLoading?: boolean;
 }

@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-const phoneRegex = /^(\+420|\+421)\s?\d{9}$/;
+const phoneRegex = /^(\+420|\+421)\s*\d{3}\s*\d{3}\s*\d{3}$/;
 
 export const donorSchema = z.object({
     id: z.string().optional(),
@@ -25,25 +25,21 @@ export const donationSchema = z.object({
         .max(10000, 'Maximálna suma je 10 000 €'),
     donors: z.array(donorSchema),
     consent: z.boolean()
-        .refine((val) => val , 'Musíte súhlasiť so spracovaním osobných údajov'),
+        .refine((val) => val, 'Musíte súhlasiť so spracovaním osobných údajov'),
     name: z.string()
         .min(2, 'Meno musí mať aspoň 2 znaky')
         .max(20, 'Meno môže mať maximálne 20 znakov')
         .optional(),
     surname: z.string()
         .min(2, 'Priezvisko musí mať aspoň 2 znaky')
-        .max(30, 'Priezvisko môže mať maximálne 30 znakov')
-        .optional(),
+        .max(30, 'Priezvisko môže mať maximálne 30 znakov'),
     email: z.string()
         .email('Prosím zadajte platný email')
         .min(1, 'Email je povinný'),
     phone: z.string()
         .regex(phoneRegex, 'Prosím zadajte platné číslo (+420/+421 123456789)'),
 }).refine(
-    (data) => {
-        return !(data.helpType === 'specific' && !data.shelterId);
-
-    },
+    (data) => data.helpType !== 'specific' || !!data.shelterId,
     {
         message: 'Prosím vyberte útulok',
         path: ['shelterId'],
