@@ -1,68 +1,107 @@
 'use client';
 
-import { Container, Grid } from '@mantine/core';
-import { IconBrandInstagram, IconBrandFacebook } from '@tabler/icons-react';
-import { useTranslation } from '@/src/hooks/useTranslation';
-import DogIcon from "@/src/components/icons/DogIcon";
 import Link from 'next/link';
-import {usePathname} from "next/navigation";
+import { IconHeart, IconBrandGithub, IconBrandTwitter, IconBrandInstagram } from '@tabler/icons-react';
+import { useTranslation } from '@/src/hooks/useTranslation';
 
 export default function Footer() {
     const { t } = useTranslation();
-    const pathname = usePathname();
+    const currentYear = new Date().getFullYear();
 
     return (
-        <footer className="w-full bg-white border-t border-gray-100 mt-auto">
-            <Container size="lg" py="xl">
-                <Grid className="w-full">
-
-                    <Grid.Col span={{ base: 12, md: 6 }}>
+        <footer className="bg-white/90 backdrop-blur-sm border-t border-gray-200 mt-auto">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    {/* Logo */}
+                    <div className="md:col-span-1">
                         <div className="flex items-center gap-2 text-lg font-bold text-gray-900">
-                            <DogIcon size={24} className="text-blue-600" />
-                            <span>GoodBoy</span>
+                            <span>🐕</span>
+                            <span>
+                                GoodBoy<span className="text-blue-600">Foundation</span>
+                            </span>
                         </div>
-                    </Grid.Col>
+                        <p className="mt-2 text-sm text-gray-600">
+                            {t('footer.description')}
+                        </p>
+                        <div className="flex gap-3 mt-4">
+                            <a
+                                href="#"
+                                className="text-gray-400 hover:text-blue-600 transition-colors"
+                                aria-label="GitHub"
+                            >
+                                <IconBrandGithub size={20} />
+                            </a>
+                            <a
+                                href="#"
+                                className="text-gray-400 hover:text-blue-400 transition-colors"
+                                aria-label="Twitter"
+                            >
+                                <IconBrandTwitter size={20} />
+                            </a>
+                            <a
+                                href="#"
+                                className="text-gray-400 hover:text-pink-600 transition-colors"
+                                aria-label="Instagram"
+                            >
+                                <IconBrandInstagram size={20} />
+                            </a>
+                        </div>
+                    </div>
 
-                    <Grid.Col span={{ base: 12, md: 6 }}>
-                        <div className="flex items-center justify-end gap-6">
-
-                            {pathname === '/' &&
-                                <div className="flex gap-3">
-                                    <a
-                                        href="#"
-                                        className="text-gray-400 hover:text-blue-600 transition-colors"
-                                        aria-label="Facebook"
-                                    >
-                                        <IconBrandFacebook size={20} />
-                                    </a>
-                                    <a
-                                        href="#"
-                                        className="text-gray-400 hover:text-pink-600 transition-colors"
-                                        aria-label="Instagram"
-                                    >
-                                        <IconBrandInstagram size={20} />
-                                    </a>
-                                </div>
-                            }
-
-                            <div className="flex gap-6 text-sm">
-                                <Link
-                                    href="/kontakt"
-                                    className="text-[#4B5563] hover:text-blue-600 transition-colors text-base leading-6 font-normal"
-                                >
+                    {/* Links */}
+                    <div>
+                        <h3 className="font-semibold text-gray-900 mb-3">{t('footer.links')}</h3>
+                        <ul className="space-y-2 text-sm">
+                            <li>
+                                <Link href="/" className="text-gray-600 hover:text-blue-600 transition-colors">
+                                    {t('navigation.home')}
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href="/donors" className="text-gray-600 hover:text-blue-600 transition-colors">
+                                    {t('navigation.donors')}
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href="/kontakt" className="text-gray-600 hover:text-blue-600 transition-colors">
                                     {t('navigation.contact')}
                                 </Link>
-                                <Link
-                                    href="/about"
-                                    className="text-[#4B5563] hover:text-blue-600 transition-colors text-base leading-6 font-normal"
-                                >
-                                    O projekte
-                                </Link>
-                            </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    {/* Info */}
+                    <div>
+                        <h3 className="font-semibold text-gray-900 mb-3">{t('footer.info')}</h3>
+                        <ul className="space-y-2 text-sm">
+                            <li className="text-gray-600">Hlavná 123</li>
+                            <li className="text-gray-600">811 01 Bratislava</li>
+                            <li className="text-gray-600">info@goodboy-foundation.sk</li>
+                        </ul>
+                    </div>
+
+                    {/* Follow Us */}
+                    <div>
+                        <h3 className="font-semibold text-gray-900 mb-3">{t('footer.followUs')}</h3>
+                        <p className="text-sm text-gray-600">
+                            {t('footer.followUsDesc')}
+                        </p>
+                        <div className="mt-3 flex items-center gap-1 text-sm text-gray-600">
+                            <IconHeart size={16} className="text-red-500 fill-red-500" />
+                            <span>{t('footer.helpingSince')}</span>
                         </div>
-                    </Grid.Col>
-                </Grid>
-            </Container>
+                    </div>
+                </div>
+
+                <div className="mt-8 pt-8 border-t border-gray-200 text-center text-sm text-gray-500">
+                    <p>
+                        © {currentYear} GoodBoy Foundation. {t('footer.rights')}
+                        <span className="hidden sm:inline"> | </span>
+                        <br className="sm:hidden" />
+                        {t('footer.madeWith')}
+                    </p>
+                </div>
+            </div>
         </footer>
     );
 }

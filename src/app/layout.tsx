@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { MantineProvider } from '@mantine/core';
 import '@mantine/core/styles.css';
 import './globals.css';
+import Header from "@/src/components/layout/Header";
+import Footer from "@/src/components/layout/Footer";
 import React from "react";
 import Providers from "@/src/app/providers";
 
@@ -57,7 +59,9 @@ export default function RootLayout({
         <body className="flex flex-col min-h-screen">
         <MantineProvider>
             <Providers>
+                <Header />
                 <main className="flex-1">{children}</main>
+                <Footer />
             </Providers>
         </MantineProvider>
         </body>

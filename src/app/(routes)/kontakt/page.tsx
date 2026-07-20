@@ -1,90 +1,158 @@
 'use client';
 
-import {Container, Title, Text, Card, Grid, Paper} from '@mantine/core';
-import {IconArrowLeft, IconMail, IconMapPin, IconPhone} from '@tabler/icons-react';
-import {useTranslation} from '@/src/hooks/useTranslation';
-import Footer from "@/src/components/layout/Footer";
-import Link from 'next/link';
+import { Container, Title, Text, Card, Grid, Stack, ThemeIcon, Group, Paper } from '@mantine/core';
+import { IconMail, IconPhone, IconMapPin, IconClock, IconWorld } from '@tabler/icons-react';
+import { useTranslation } from '@/src/hooks/useTranslation';
 
 export default function KontaktPage() {
-    const {t} = useTranslation();
+    const { t } = useTranslation();
 
     return (
         <Container size="lg" py="xl">
-            <Link
-                href="/"
-                className="inline-flex items-center gap-2 transition-colors mb-10 figma-button-text back-btn"
-            >
-                <IconArrowLeft size={20} className="back-btn" />
-                Späť
-            </Link>
-
-            <Title order={1} className="text-left mb-10">
+            <Title order={1} className="text-center mb-4">
                 {t('contact.title')}
             </Title>
+            <Text size="lg" className="text-center text-gray-600 mb-8">
+                {t('contact.subtitle')}
+            </Text>
 
-            <Grid mt="xl" className="w-full mb-10 gap-8">
-                <Grid.Col span={{base: 12, md: 4}}>
-                    <Card padding="lg" className="h-full w-full">
-                        <div className="flex flex-col items-center justify-center text-center">
-                            <div className="icon-wrapper p-4">
-                                <IconMail size={24} className='contact' />
-                            </div>
-                            <Title order={4} mb="sm" className='mb-2 email-text'>Email</Title>
-                            <Text size="sm" className="text-center desc-text">
-                                Our friendly team is here to help.
-                            </Text>
-                            <Text size="sm" className="text-center link">
-                                hello@goodrequest.com
-                            </Text>
-                        </div>
+            <Grid>
+                <Grid.Col span={{ base: 12, md: 6 }}>
+                    <Card shadow="sm" padding="lg" radius="md" withBorder className="h-full">
+                        <Title order={3} mb="md">{t('contact.info')}</Title>
+
+                        <Stack gap="md">
+                            <Group wrap="nowrap">
+                                <ThemeIcon color="blue" size="lg" radius="xl">
+                                    <IconMapPin size={20} />
+                                </ThemeIcon>
+                                <div>
+                                    <Text size="sm" c="dimmed">{t('contact.address')}</Text>
+                                    <Text>GoodBoy Foundation</Text>
+                                    <Text>Hlavná 123</Text>
+                                    <Text>811 01 Bratislava</Text>
+                                    <Text>Slovenská republika</Text>
+                                </div>
+                            </Group>
+
+                            <Group wrap="nowrap">
+                                <ThemeIcon color="green" size="lg" radius="xl">
+                                    <IconPhone size={20} />
+                                </ThemeIcon>
+                                <div>
+                                    <Text size="sm" c="dimmed">{t('contact.phone')}</Text>
+                                    <Text>+421 900 123 456</Text>
+                                </div>
+                            </Group>
+
+                            <Group wrap="nowrap">
+                                <ThemeIcon color="red" size="lg" radius="xl">
+                                    <IconMail size={20} />
+                                </ThemeIcon>
+                                <div>
+                                    <Text size="sm" c="dimmed">{t('contact.email')}</Text>
+                                    <Text>info@goodboy-foundation.sk</Text>
+                                </div>
+                            </Group>
+
+                            <Group wrap="nowrap">
+                                <ThemeIcon color="grape" size="lg" radius="xl">
+                                    <IconWorld size={20} />
+                                </ThemeIcon>
+                                <div>
+                                    <Text size="sm" c="dimmed">{t('contact.web')}</Text>
+                                    <Text>www.goodboy-foundation.sk</Text>
+                                </div>
+                            </Group>
+                        </Stack>
                     </Card>
                 </Grid.Col>
 
-                <Grid.Col span={{base: 12, md: 4}}>
-                    <Card padding="lg" className="h-full w-full">
-                        <div className="flex flex-col items-center justify-center text-center">
-                            <div className="icon-wrapper p-4">
-                                <IconMapPin size={24} className='contact' />
-                            </div>
-                            <Title order={4} mb="sm" className='mb-2 email-text'>Office</Title>
-                            <Text size="sm" className="text-center desc-text">
-                                Come say hello at our office HQ.
-                            </Text>
-                            <Text size="sm" className="text-center link">
-                                Obchodná 3D, 010 08 Žilina, Slovakia
-                            </Text>
-                        </div>
-                    </Card>
-                </Grid.Col>
+                <Grid.Col span={{ base: 12, md: 6 }}>
+                    <Card shadow="sm" padding="lg" radius="md" withBorder className="h-full">
+                        <Title order={3} mb="md">{t('contact.hours')}</Title>
 
-                <Grid.Col span={{base: 12, md: 4}}>
-                    <Card padding="lg" className="h-full w-full">
-                        <div className="flex flex-col items-center justify-center text-center">
-                            <div className="icon-wrapper p-4">
-                                <IconPhone size={24} className='contact' />
-                            </div>
-                            <Title order={4} mb="sm" className='mb-2 email-text'>Phone</Title>
-                            <Text size="sm" className="text-center desc-text">
-                                Mon-Fri from 8am to 5pm.
-                            </Text>
-                            <Text size="sm" className="text-center link">
-                                +421 911 750 750
-                            </Text>
+                        <Stack gap="sm">
+                            <Group justify="space-between">
+                                <Text>{t('contact.weekdays')}</Text>
+                                <Text fw={500}>9:00 - 17:00</Text>
+                            </Group>
+                            <Group justify="space-between">
+                                <Text>{t('contact.saturday')}</Text>
+                                <Text fw={500}>10:00 - 14:00</Text>
+                            </Group>
+                            <Group justify="space-between">
+                                <Text>{t('contact.sunday')}</Text>
+                                <Text fw={500} c="dimmed">{t('contact.closed')}</Text>
+                            </Group>
+                        </Stack>
+
+                        <div className="mt-6 p-4 bg-blue-50 rounded-lg">
+                            <Group wrap="nowrap">
+                                <IconClock size={20} className="text-blue-600" />
+                                <Text size="sm" c="blue">
+                                    {t('contact.emergency')}
+                                </Text>
+                            </Group>
                         </div>
                     </Card>
                 </Grid.Col>
             </Grid>
 
-            <Paper className={'image-wrapper'}>
-                <img
-                    src="/images/good-doggo-2.jpg"
-                    alt="Good boy dog"
-                    className="w-full h-auto"
-                />
+            <Paper shadow="sm" p="xl" radius="md" withBorder mt="xl">
+                <Title order={3} mb="md">{t('contact.where')}</Title>
+                <div className="w-full h-64 bg-gradient-to-br from-blue-100 to-green-100 rounded-lg flex items-center justify-center relative overflow-hidden">
+                    <div className="text-center">
+                        <div className="text-6xl mb-2 animate-float">📍</div>
+                        <Text size="lg" fw={600}>GoodBoy Foundation</Text>
+                        <Text c="dimmed">Hlavná 123, 811 01 Bratislava</Text>
+                    </div>
+                    <div className="absolute top-0 left-0 w-32 h-32 bg-blue-400/20 rounded-full -translate-x-1/2 -translate-y-1/2" />
+                    <div className="absolute bottom-0 right-0 w-48 h-48 bg-green-400/20 rounded-full translate-x-1/3 translate-y-1/3" />
+                    <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-blue-500/5 rounded-full -translate-x-1/2 -translate-y-1/2 animate-pulse" />
+                </div>
+                <Text size="sm" c="dimmed" className="mt-3 text-center">
+                    Hlavná 123, 811 01 Bratislava, Slovenská republika
+                </Text>
             </Paper>
 
-            <Footer/>
+            <Grid mt="xl">
+                <Grid.Col span={{ base: 12, md: 4 }}>
+                    <Card shadow="sm" padding="lg" radius="md" withBorder>
+                        <div className="text-center">
+                            <div className="text-4xl mb-3">🏠</div>
+                            <Title order={4} mb="sm">{t('contact.shelters')}</Title>
+                            <Text size="sm" c="dimmed">
+                                {t('contact.sheltersDesc')}
+                            </Text>
+                        </div>
+                    </Card>
+                </Grid.Col>
+
+                <Grid.Col span={{ base: 12, md: 4 }}>
+                    <Card shadow="sm" padding="lg" radius="md" withBorder>
+                        <div className="text-center">
+                            <div className="text-4xl mb-3">🐕</div>
+                            <Title order={4} mb="sm">{t('contact.dogs')}</Title>
+                            <Text size="sm" c="dimmed">
+                                {t('contact.dogsDesc')}
+                            </Text>
+                        </div>
+                    </Card>
+                </Grid.Col>
+
+                <Grid.Col span={{ base: 12, md: 4 }}>
+                    <Card shadow="sm" padding="lg" radius="md" withBorder>
+                        <div className="text-center">
+                            <div className="text-4xl mb-3">🤝</div>
+                            <Title order={4} mb="sm">{t('contact.cooperation')}</Title>
+                            <Text size="sm" c="dimmed">
+                                {t('contact.cooperationDesc')}
+                            </Text>
+                        </div>
+                    </Card>
+                </Grid.Col>
+            </Grid>
         </Container>
     );
 }
